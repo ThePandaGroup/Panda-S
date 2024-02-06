@@ -1,4 +1,5 @@
 db = db.getSiblingDB('toDoSample')
+
 db.createCollection('shoes')
 listsCollection = db.getCollection("shoes")
 listsCollection.remove({})
@@ -35,8 +36,8 @@ listsCollection.insert(
 )
 
 
-db.createCollection('buyer')
-tasksCollection = db.getCollection("buyer")
+db.createCollection('tasks')
+tasksCollection = db.getCollection("tasks")
 tasksCollection.remove({})
 tasksCollection.insert(
 {
@@ -147,5 +148,38 @@ tasksCollection.insert(
 	  status: "I"
 	 }
 	]	
+}
+)
+
+
+
+db.createCollection('buyer')
+listsCollection = db.getCollection("buyer")
+listsCollection.remove({})
+listsCollection.insert(
+{
+	  shoeName: "Grocery List",
+	  shoeDescription: "Grocery List for home.",
+	  shoeId: 1,
+	  shoeSize: 5.5,
+	  shoeRating: 4.5,
+	  sellerId: 3599,
+	  shoePrice: 39.99
+}
+)
+
+
+db.createCollection('seller')
+listsCollection = db.getCollection("seller")
+listsCollection.remove({})
+listsCollection.insert(
+{
+	  shoeName: "Grocery List",
+	  shoeDescription: "Grocery List for home.",
+	  shoeId: 1,
+	  shoeSize: 5.5,
+	  shoeRating: 4.5,
+	  sellerId: 3599,
+	  shoePrice: 39.99
 }
 )
