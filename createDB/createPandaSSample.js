@@ -1,6 +1,6 @@
 db = db.getSiblingDB('toDoSample')
-db.createCollection('lists')
-listsCollection = db.getCollection("lists")
+db.createCollection('shoes')
+listsCollection = db.getCollection("shoes")
 listsCollection.remove({})
 listsCollection.insert(
 {
