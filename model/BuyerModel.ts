@@ -1,5 +1,5 @@
 import * as Mongoose from "mongoose";
-import {IBuyerModel} from '../interfaces/IBuyerModel';
+import {IBuyer} from '../interfaces/IBuyerModel';
 
 class BuyerModel {
     public schema:any;
@@ -27,8 +27,8 @@ class BuyerModel {
 
     public async createModel() {
         try {
-            await Mongoose.connect(this.dbConnectionString, {useNewUrlParser: true, useUnifiedTopology: true});
-            this.model = Mongoose.model<IBuyerModel>("Lists", this.schema);
+            await Mongoose.connect(this.dbConnectionString, {useNewUrlParser: true, useUnifiedTopology: true} as Mongoose.ConnectOptions);
+            this.model = Mongoose.model<IBuyer>("Lists", this.schema);
         }
         catch (e) {
             console.error(e);
@@ -72,4 +72,4 @@ class BuyerModel {
         }
     }
 }
-export {ListModel};
+export {BuyerModel};
