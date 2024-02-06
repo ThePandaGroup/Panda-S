@@ -32,8 +32,10 @@ listsCollection.insert(
 	  owner: "israelh"
 }
 )
-db.createCollection('tasks')
-tasksCollection = db.getCollection("tasks")
+
+
+db.createCollection('buyer')
+tasksCollection = db.getCollection("buyer")
 tasksCollection.remove({})
 tasksCollection.insert(
 {
