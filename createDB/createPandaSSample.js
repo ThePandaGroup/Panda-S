@@ -5,13 +5,13 @@ shoeCollection = db.getCollection("shoes")
 shoeCollection.remove({})
 shoeCollection.insert(
 {
-	  shoeName: "KungPao Shoe",
-	  shoeDescription: "The shoe that will let you destress.",
-	  shoeId: 976-2222,
-	  shoeSize: 5.5,
-	  shoeRating: 4.5,
-	  sellerId: 3599,
-	  shoePrice: 39.99
+	shoeName: "KungPao Shoe",
+	shoeDescription: "The shoe that will let you destress.",
+	shoeId: 976-2222,
+	shoeSize: 5.5,
+	shoeRating: 4.5,
+	sellerId: 3599,
+	shoePrice: 39.99
 }
 )
 shoeCollection.insert(
@@ -42,24 +42,24 @@ buyerCollection = db.getCollection("buyer")
 buyerCollection.remove({})
 buyerCollection.insert(
 {
-	  buyerName: "Robert Widjaja",
-	  buyerID: 1111,
-	  buyerEmail: "gameislife@outlook.com",
-	  buyerPassword: "jddsajfafddl111123213",
-	  subscriptionID: 0,
-	  shippingAddr: "some random streets some random city some random state 98001",
-	  orderHistory: []
+	buyerName: "Robert Widjaja",
+	buyerID: 1111,
+	buyerEmail: "gameislife@outlook.com",
+	buyerPassword: "jddsajfafddl111123213",
+	subscriptionID: 0,
+	shippingAddr: "some random streets some random city some random state 98001",
+	orderHistory: []
 }
 )
 buyerCollection.insert(
 {
-		buyerName: "Ving Leap Chen",
-		buyerID: 1111,
-		buyerEmail: "leapwantsdopeshoe@gmail.com.",
-		buyerPassword: "jddsajfafddl111123213",
-		subscriptionID: 0,
-		shippingAddr: "some random streets some random city some random state 98001",
-		orderHistory: []
+	buyerName: "Ving Leap Chen",
+	buyerID: 1111,
+	buyerEmail: "leapwantsdopeshoe@gmail.com.",
+	buyerPassword: "jddsajfafddl111123213",
+	subscriptionID: 0,
+	shippingAddr: "some random streets some random city some random state 98001",
+	orderHistory: []
 }
 )
 
