@@ -4,12 +4,13 @@ listsCollection = db.getCollection("shoes")
 listsCollection.remove({})
 listsCollection.insert(
 {
-	  name: "Grocery List",
-	  description: "Grocery List for home.",
-	  listId: 1,
-	  due: "04-27-2015",
-	  state: "A",
-	  owner: "israelh"
+	  shoeName: "Grocery List",
+	  shoeDescription: "Grocery List for home.",
+	  shoeId: 1,
+	  shoeSize: 5.5,
+	  shoeRating: 4.5,
+	  sellerId: 3599,
+	  shoePrice: 39.99
 }
 )
 listsCollection.insert(
