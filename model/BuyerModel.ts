@@ -15,12 +15,13 @@ class BuyerModel {
     public createSchema() {
         this.schema = new Mongoose.Schema(
             {
-                name: String,
-                description: String,
-                listId: String,
-                due: String,
-                state: String,
-                owner: String
+                buyerName: String,
+                buyerID: Number,
+                buyerEmail: String,
+                buyerPassword: String,
+                subscriptionID: Number,
+                shippingAddr: String,
+                orderHistory: [Number]
             }, {collection: 'lists'}
         );    
     }
