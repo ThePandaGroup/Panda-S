@@ -6,9 +6,6 @@ interface ISeller extends Mongoose.Document {
     sellerEmail: string;
     sellerPassword: string;
     subscriptionID: number;
-    storeID: number;
-    invList: number[];
-    salesHistory: number[];
 }
 
 export {ISeller};
