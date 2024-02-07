@@ -3,10 +3,10 @@ import Mongoose from "mongoose";
 interface IShoe extends Mongoose.Document {
     shoeName: string;
     shoeDescription: string;
-    shoeId: number;
+    shoeId: string;
     shoeSize: number;
     shoeRating: number;
-    sellerId: number;
+    storeId: string;
     shoePrice: number;
 }
 

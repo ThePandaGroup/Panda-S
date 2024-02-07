@@ -16,7 +16,7 @@ class SellerModel {
     public createSchema() {
         this.schema = new Mongoose.Schema({
             sellerName: String,
-            sellerID: Number,
+            sellerID: String,
             sellerEmail: String,
             sellerPassword: String,
             subscriptionID: Number,

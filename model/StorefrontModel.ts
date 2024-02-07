@@ -15,11 +15,10 @@ class StorefrontModel {
   public createSchema() {
     this.schema = new Mongoose.Schema(
       {
-        sellerID: Number,
-        storeID: Number,
-        invList: [{ type: Number }],
-        salesHistory: [{ type: Number }],
-        storePic: Buffer
+        sellerID: String,
+        storeID: String,
+        invList: [String],
+        salesHistory: [String],
       }, {collection: 'shoes'}
     );
   }

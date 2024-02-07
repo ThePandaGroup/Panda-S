@@ -2,13 +2,13 @@ import Mongoose from "mongoose";
 
 interface IBuyer extends Mongoose.Document {
     buyerName: string;
-    buyerID: number;
+    buyerID: string;
     buyerEmail: string;
     buyerPassword: string;
     subscriptionID: number;
     shippingAddr: string;
-    orderHistory: number[];
-    cart: number[];
+    orderHistory: string[];
+    cart: string[];
 }
 
 export {IBuyer};
