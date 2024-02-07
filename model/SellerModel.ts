@@ -20,9 +20,6 @@ class SellerModel {
             sellerEmail: String,
             sellerPassword: String,
             subscriptionID: Number,
-            storeID: Number,
-            invList: [{ type: Number }],
-            salesHistory: [{ type: Number }],
         }, { collection: "sellers" });
     }
 
@@ -35,7 +32,7 @@ class SellerModel {
         }
     }
 
-    
+
 
 }
 
