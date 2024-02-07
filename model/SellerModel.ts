@@ -1,5 +1,6 @@
 import * as Mongoose from "mongoose";
 import { ISeller } from "../interfaces/ISellerModel";
+import { BuyerModel } from "./BuyerModel";
 
 class SellerModel {
     public schema: any;
@@ -37,3 +38,5 @@ class SellerModel {
     
 
 }
+
+export {SellerModel};

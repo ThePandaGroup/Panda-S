@@ -17,7 +17,7 @@ class ShoeModel {
       {
         shoeName: String,
         shoeDescription: String,
-        shoeId: String,
+        shoeId: Number,
         shoeSize: Number,
         shoeRating: Number,
         sellerId: Number,
@@ -38,25 +38,23 @@ class ShoeModel {
 
   public async retrieveAllShoes(response:any) {
     var query = this.model.find({});
-    // query.where("state");
-    // query.lt("B");
     try {
-        const itemArray = await query.exec();
-        response.json(itemArray);
+      const shoesArray = await query.exec();
+      response.json(shoesArray);
     }
     catch(e) {
-        console.error(e);
+        console.log(e);
     }
   }
 
-  public async retrieveShoes(response:any, value:number) {
-    var query = this.model.findOne({shoeId: value});
+  public async retrieveShoe(response:any, value:number) {
+    var query = this.model.findOne({"shoeId": value});
     try {
-        const result = await query.exec();
-        response.json(result) ;
+      const result = await query.exec();
+      response.json(result) ;
     }
     catch (e) {
-        console.error(e);
+      console.log(e);
     }
   }
 
