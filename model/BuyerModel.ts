@@ -27,7 +27,7 @@ class BuyerModel {
 
     public async createModel() {
         try {
-            await Mongoose.connect(this.dbConnectionString, {useNewUrlParser: true, useUnifiedTopology: true} as Mongoose.ConnectOptions);
+            await Mongoose.connect(this.dbConnectionString);
             this.model = Mongoose.model<IBuyer>("Lists", this.schema);
         }
         catch (e) {

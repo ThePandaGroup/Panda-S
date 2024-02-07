@@ -11,5 +11,3 @@ interface IShoe extends Mongoose.Document {
 }
 
 export {IShoe};
-
-//hello
