@@ -3,6 +3,7 @@ import * as bodyParser from 'body-parser';
 import {BuyerModel} from './model/BuyerModel';
 import {SellerModel} from './model/SellerModel';
 import {ShoeModel} from './model/ShoeModel';
+import {StorefrontModel} from './model/StorefrontModel';
 import * as crypto from 'crypto';
 
 // Creates and configures an ExpressJS web server.
@@ -13,6 +14,7 @@ class App {
   public Buyers:BuyerModel;
   public Sellers:SellerModel;
   public Shoes:ShoeModel;
+  public Store:StorefrontModel;
 
   //Run configuration methods on the Express instance.
   constructor(mongoDBConnection:string)

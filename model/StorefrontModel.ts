@@ -1,7 +1,7 @@
 import * as Mongoose from "mongoose";
 import {IStorefront} from '../interfaces/IStorefrontModel';
 
-class ShoeModel {
+class StorefrontModel {
   public schema:any;
   public model:any;
   public dbConnectionString:string;
@@ -35,4 +35,4 @@ class ShoeModel {
   }
 }
 
-export {ShoeModel};
+export {StorefrontModel};

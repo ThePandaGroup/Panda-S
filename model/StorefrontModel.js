@@ -36,24 +36,24 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SellerModel = void 0;
+exports.StorefrontModel = void 0;
 var Mongoose = require("mongoose");
-var SellerModel = /** @class */ (function () {
-    function SellerModel(dbConnectionString) {
-        this.dbConnectionString = dbConnectionString;
+var StorefrontModel = /** @class */ (function () {
+    function StorefrontModel(DB_CONNECTION_STRING) {
+        this.dbConnectionString = DB_CONNECTION_STRING;
         this.createSchema();
         this.createModel();
     }
-    SellerModel.prototype.createSchema = function () {
+    StorefrontModel.prototype.createSchema = function () {
         this.schema = new Mongoose.Schema({
-            sellerName: String,
             sellerID: Number,
-            sellerEmail: String,
-            sellerPassword: String,
-            subscriptionID: Number,
-        }, { collection: "sellers" });
+            storeID: Number,
+            invList: [{ type: Number }],
+            salesHistory: [{ type: Number }],
+            storePic: Buffer
+        }, { collection: 'shoes' });
     };
-    SellerModel.prototype.createModel = function () {
+    StorefrontModel.prototype.createModel = function () {
         return __awaiter(this, void 0, void 0, function () {
             var e_1;
             return __generator(this, function (_a) {
@@ -63,7 +63,7 @@ var SellerModel = /** @class */ (function () {
                         return [4 /*yield*/, Mongoose.connect(this.dbConnectionString)];
                     case 1:
                         _a.sent();
-                        this.model = Mongoose.model("Seller", this.schema);
+                        this.model = Mongoose.model("Storefront", this.schema);
                         return [3 /*break*/, 3];
                     case 2:
                         e_1 = _a.sent();
@@ -74,6 +74,6 @@ var SellerModel = /** @class */ (function () {
             });
         });
     };
-    return SellerModel;
+    return StorefrontModel;
 }());
-exports.SellerModel = SellerModel;
+exports.StorefrontModel = StorefrontModel;
