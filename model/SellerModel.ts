@@ -35,6 +35,17 @@ class SellerModel {
         }
     }
 
+    public async retrieveSellerInfo(response:any, value:number) {
+        var query = this.model.findOne({SellerId: value});
+        try {
+            const result = await query.exec();
+            response.json(result) ;
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }
+
     
 
 }
