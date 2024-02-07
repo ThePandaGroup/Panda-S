@@ -25,6 +25,7 @@ class App {
     this.Buyers = new BuyerModel(mongoDBConnection);
     this.Sellers = new SellerModel(mongoDBConnection);
     this.Shoes = new ShoeModel(mongoDBConnection);
+    this.Store = new StorefrontModel(mongoDBConnection);
   }
 
   // Configure Express middleware.
