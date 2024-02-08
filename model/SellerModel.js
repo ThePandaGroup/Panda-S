@@ -47,7 +47,7 @@ var SellerModel = /** @class */ (function () {
     SellerModel.prototype.createSchema = function () {
         this.schema = new Mongoose.Schema({
             sellerName: String,
-            sellerID: Number,
+            sellerID: String,
             sellerEmail: String,
             sellerPassword: String,
             subscriptionID: Number,
@@ -70,6 +70,30 @@ var SellerModel = /** @class */ (function () {
                         console.error(e_1);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    SellerModel.prototype.retrieveSellerInfo = function (response, value) {
+        return __awaiter(this, void 0, void 0, function () {
+            var query, result, e_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        query = this.model.findOne({ SellerId: value });
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, query.exec()];
+                    case 2:
+                        result = _a.sent();
+                        response.json(result);
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_2 = _a.sent();
+                        console.error(e_2);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
                 }
             });
         });

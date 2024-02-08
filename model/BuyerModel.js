@@ -46,12 +46,13 @@ var BuyerModel = /** @class */ (function () {
     }
     BuyerModel.prototype.createSchema = function () {
         this.schema = new Mongoose.Schema({
-            name: String,
-            description: String,
-            listId: String,
-            due: String,
-            state: String,
-            owner: String
+            buyerName: String,
+            buyerID: String,
+            buyerEmail: String,
+            buyerPassword: String,
+            subscriptionID: Number,
+            shippingAddr: String,
+            orderHistory: [String]
         }, { collection: 'lists' });
     };
     BuyerModel.prototype.createModel = function () {
@@ -75,37 +76,13 @@ var BuyerModel = /** @class */ (function () {
             });
         });
     };
-    BuyerModel.prototype.retrieveAllLists = function (response) {
+    BuyerModel.prototype.retrieveBuyerInfo = function (response, value) {
         return __awaiter(this, void 0, void 0, function () {
-            var query, itemArray, e_2;
+            var query, result, e_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = this.model.find({});
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, query.exec()];
-                    case 2:
-                        itemArray = _a.sent();
-                        response.json(itemArray);
-                        return [3 /*break*/, 4];
-                    case 3:
-                        e_2 = _a.sent();
-                        console.error(e_2);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    BuyerModel.prototype.retrieveLists = function (response, value) {
-        return __awaiter(this, void 0, void 0, function () {
-            var query, result, e_3;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        query = this.model.findOne({ listId: value });
+                        query = this.model.findOne({ BuyerId: value });
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -115,34 +92,8 @@ var BuyerModel = /** @class */ (function () {
                         response.json(result);
                         return [3 /*break*/, 4];
                     case 3:
-                        e_3 = _a.sent();
-                        console.error(e_3);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    BuyerModel.prototype.retrieveListCount = function (response) {
-        return __awaiter(this, void 0, void 0, function () {
-            var query, numberOfLists, e_4;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        console.log("retrieve List Count ...");
-                        query = this.model.estimatedDocumentCount();
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, query.exec()];
-                    case 2:
-                        numberOfLists = _a.sent();
-                        console.log("numberOfLists: " + numberOfLists);
-                        response.json(numberOfLists);
-                        return [3 /*break*/, 4];
-                    case 3:
-                        e_4 = _a.sent();
-                        console.error(e_4);
+                        e_2 = _a.sent();
+                        console.error(e_2);
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
                 }

@@ -48,10 +48,10 @@ var ShoeModel = /** @class */ (function () {
         this.schema = new Mongoose.Schema({
             shoeName: String,
             shoeDescription: String,
-            shoeId: Number,
+            shoeId: String,
             shoeSize: Number,
             shoeRating: Number,
-            sellerId: Number,
+            sellerId: String,
             shoePrice: Number
         }, { collection: 'shoes' });
     };
