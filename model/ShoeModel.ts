@@ -29,7 +29,7 @@ class ShoeModel {
   public async createModel() {
     try {
       await Mongoose.connect(this.dbConnectionString);
-      this.model = Mongoose.model<IShoe>("Shoes", this.schema);
+      this.model = Mongoose.model<IShoe>("shoes", this.schema);
     }
     catch (e) {
         console.error(e);

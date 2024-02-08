@@ -31,7 +31,7 @@ shoeCollection.insert(
 {
 	shoeName: "Leap Shoe",
 	shoeDescription: "A shoe that is easy to jump",
-	shoeId: "1",
+	shoeId: "2",
 	shoeSize: 5.5,
 	shoeRating: 4.5,
 	sellerId: "3599",
