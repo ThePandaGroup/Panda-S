@@ -43,6 +43,8 @@ class App {
   private routes(): void {
     let router = express.Router();
 
+    // SHOES ROUTES
+
     // Query All Shoes
     router.get('/app/shoes', async (req, res) => {
       console.log('Query All Shoes');
@@ -56,14 +58,7 @@ class App {
       await this.Shoes.retrieveShoe(res, id);
     });
 
-    // Query A Buyer Info
-    router.get('/app/buyers/:buyerId', async (req, res) => {
-      console.log("Query Buyer Info");
-      const id = Number(req.params.buyerId);
-
-      await this.Buyers.retrieveBuyerInfo(res, id);
-    });
-
+    // BUYER ROUTE
 
     // Query All Buyers
     router.get('/app/buyers', async (req, res) => {
@@ -71,11 +66,40 @@ class App {
       await this.Buyers.retrieveAllBuyers(res);
     });
 
+    // Query A Buyer Info
+    router.get('/app/buyers/:buyerId', async (req, res) => {
+      console.log("Query Buyer Info");
+      const id = Number(req.params.buyerId);
+      await this.Buyers.retrieveBuyerInfo(res, id);
+    });
 
+    // Query A Buyer's Cart
+    router.get('/app/buyers/:buyerId/cart', async (req, res) => {
+      const id = Number(req.params.buyerId);
+      console.log("Query Buyer's Cart with id: " + id);
+      await this.Buyers.retrieveBuyersCart(res, id);
+    });
 
+    // Add to Buyer's Cart
+    router.post('/app/buyers/:buyerId/cart/:shoeId', async (req, res) => {
+      let shoeId = req.params.shoeId;
+      const buyerId = Number(req.params.buyerId);
+      try {
+          await this.Buyers.addToCart(res, buyerId, shoeId);
+      } catch(err) {
+          console.log(`Error in adding an Item to the cart ${err}`);
+      };
+    })
+
+    // SELLER ROUTE
+
+    // Query All Sellers
+    router.get('/app/sellers', async (req, res) => {
+      console.log('Query All Sellers');
+      await this.Sellers.retrieveAllSellers(res);
+    });
 
     // Query a Seller Info
-
     router.get('/app/sellers/:sellerId', async (req, res) => {
       console.log("Query Seller Info");
       const id = Number(req.params.sellerId);
@@ -84,13 +108,6 @@ class App {
     });
 
 
-
-    // Query All Sellers
-
-    router.get('/app/sellers', async (req, res) => {
-      console.log('Query All Sellers');
-      await this.Sellers.retrieveAllSellers(res);
-    });
 
   //   router.get('/app/list/:listId/count', async (req, res) => {
   //       var id = req.params.listId;

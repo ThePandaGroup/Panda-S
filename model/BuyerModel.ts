@@ -22,7 +22,8 @@ class BuyerModel {
                 buyerPassword: String,
                 subscriptionID: Number,
                 shippingAddr: String,
-                orderHistory: [String]
+                orderHistory: [String],
+                cart: [String],
             }, {collection: 'buyers'}
         );    
     }
@@ -31,17 +32,6 @@ class BuyerModel {
         try {
             await Mongoose.connect(this.dbConnectionString);
             this.model = Mongoose.model<IBuyer>("buyers", this.schema);
-        }
-        catch (e) {
-            console.error(e);
-        }
-    }
-
-    public async retrieveBuyerInfo(response:any, value:number) {
-        var query = this.model.findOne({"buyerId": value});
-        try {
-            const result = await query.exec();
-            response.json(result) ;
         }
         catch (e) {
             console.error(e);
@@ -59,6 +49,16 @@ class BuyerModel {
         }
     }
 
+    public async retrieveBuyerInfo(response:any, value:number) {
+        var query = this.model.findOne({"buyerId": value});
+        try {
+            const buyerInfo = await query.exec();
+            response.json(buyerInfo) ;
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }
 
     public async retrieveBuyersSub(response:any, value:number) {
         var query = this.model.findAll({subscriptionID: value});
@@ -71,8 +71,19 @@ class BuyerModel {
         }
     }
 
+    public async retrieveBuyersCart(response:any, value:number) {
+        var query = this.model.findOne({"buyerId": value});
+        try {
+            const buyerInfo = await query.exec();
+            response.json(buyerInfo.cart) ;
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }
+
     public async addToCart(response:any, value: number, id: string){
-        var query = this.model.update({BuyerId: value}, {$push: {cart: id}})
+        var query = this.model.updateOne({buyerId: value}, {$push: {cart: id}})
         try {
             console.log("Adding to Cart...")
             const result = await query.exec();

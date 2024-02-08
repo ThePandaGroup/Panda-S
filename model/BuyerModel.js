@@ -25,7 +25,8 @@ class BuyerModel {
             buyerPassword: String,
             subscriptionID: Number,
             shippingAddr: String,
-            orderHistory: [String]
+            orderHistory: [String],
+            cart: [String],
         }, { collection: 'buyers' });
     }
     createModel() {
@@ -33,18 +34,6 @@ class BuyerModel {
             try {
                 yield Mongoose.connect(this.dbConnectionString);
                 this.model = Mongoose.model("buyers", this.schema);
-            }
-            catch (e) {
-                console.error(e);
-            }
-        });
-    }
-    retrieveBuyerInfo(response, value) {
-        return __awaiter(this, void 0, void 0, function* () {
-            var query = this.model.findOne({ "buyerId": value });
-            try {
-                const result = yield query.exec();
-                response.json(result);
             }
             catch (e) {
                 console.error(e);
@@ -63,6 +52,18 @@ class BuyerModel {
             }
         });
     }
+    retrieveBuyerInfo(response, value) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var query = this.model.findOne({ "buyerId": value });
+            try {
+                const buyerInfo = yield query.exec();
+                response.json(buyerInfo);
+            }
+            catch (e) {
+                console.error(e);
+            }
+        });
+    }
     retrieveBuyersSub(response, value) {
         return __awaiter(this, void 0, void 0, function* () {
             var query = this.model.findAll({ subscriptionID: value });
@@ -75,9 +76,21 @@ class BuyerModel {
             }
         });
     }
+    retrieveBuyersCart(response, value) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var query = this.model.findOne({ "buyerId": value });
+            try {
+                const buyerInfo = yield query.exec();
+                response.json(buyerInfo.cart);
+            }
+            catch (e) {
+                console.error(e);
+            }
+        });
+    }
     addToCart(response, value, id) {
         return __awaiter(this, void 0, void 0, function* () {
-            var query = this.model.update({ BuyerId: value }, { $push: { cart: id } });
+            var query = this.model.updateOne({ buyerId: value }, { $push: { cart: id } });
             try {
                 console.log("Adding to Cart...");
                 const result = yield query.exec();

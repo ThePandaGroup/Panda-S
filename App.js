@@ -41,6 +41,7 @@ class App {
     // Configure API endpoints.
     routes() {
         let router = express.Router();
+        // SHOES ROUTES
         // Query All Shoes
         router.get('/app/shoes', (req, res) => __awaiter(this, void 0, void 0, function* () {
             console.log('Query All Shoes');
@@ -52,27 +53,47 @@ class App {
             const id = Number(req.params.shoeId);
             yield this.Shoes.retrieveShoe(res, id);
         }));
+        // BUYER ROUTE
+        // Query All Buyers
+        router.get('/app/buyers', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log('Query All Buyers');
+            yield this.Buyers.retrieveAllBuyers(res);
+        }));
         // Query A Buyer Info
         router.get('/app/buyers/:buyerId', (req, res) => __awaiter(this, void 0, void 0, function* () {
             console.log("Query Buyer Info");
             const id = Number(req.params.buyerId);
             yield this.Buyers.retrieveBuyerInfo(res, id);
         }));
-        // Query All Buyers
-        router.get('/app/buyers', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            console.log('Query All Buyers');
-            yield this.Buyers.retrieveAllBuyers(res);
+        // Query A Buyer's Cart
+        router.get('/app/buyers/:buyerId/cart', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const id = Number(req.params.buyerId);
+            console.log("Query Buyer's Cart with id: " + id);
+            yield this.Buyers.retrieveBuyersCart(res, id);
+        }));
+        // Add to Buyer's Cart
+        router.post('/app/buyers/:buyerId/cart/:shoeId', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            let shoeId = req.params.shoeId;
+            const buyerId = Number(req.params.buyerId);
+            try {
+                yield this.Buyers.addToCart(res, buyerId, shoeId);
+            }
+            catch (err) {
+                console.log(`Error in adding an Item to the cart ${err}`);
+            }
+            ;
+        }));
+        // SELLER ROUTE
+        // Query All Sellers
+        router.get('/app/sellers', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log('Query All Sellers');
+            yield this.Sellers.retrieveAllSellers(res);
         }));
         // Query a Seller Info
         router.get('/app/sellers/:sellerId', (req, res) => __awaiter(this, void 0, void 0, function* () {
             console.log("Query Seller Info");
             const id = Number(req.params.sellerId);
             yield this.Sellers.retrieveSellerInfo(res, id);
-        }));
-        // Query All Sellers
-        router.get('/app/sellers', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            console.log('Query All Sellers');
-            yield this.Sellers.retrieveAllSellers(res);
         }));
         //   router.get('/app/list/:listId/count', async (req, res) => {
         //       var id = req.params.listId;
