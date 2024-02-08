@@ -15,11 +15,12 @@ To execute the server db and then the node server, do the following:
 //compile all files
 0. tsc
 
-//set up authenticated user
-1. mongo --port 3000 -u dbAdmin -p test --authenticationDatabase admin
+//set up authenticated user... Make sure the directory ./db has been created
+// if not, it's mkdir -p ./db
+1. mongod -port 3000 -dbpath ".\db"
 
 //for mac users use the next command instead
-1. mongod --config /opt/homebrew/etc/mongod.conf --fork
+1. mongod -port 3000 -dbpath ".\db"
 
 //go into the mongo shell
 
