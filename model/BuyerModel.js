@@ -20,19 +20,19 @@ class BuyerModel {
     createSchema() {
         this.schema = new Mongoose.Schema({
             buyerName: String,
-            buyerID: String,
+            buyerId: String,
             buyerEmail: String,
             buyerPassword: String,
             subscriptionID: Number,
             shippingAddr: String,
             orderHistory: [String]
-        }, { collection: 'Buyers' });
+        }, { collection: 'buyers' });
     }
     createModel() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield Mongoose.connect(this.dbConnectionString);
-                this.model = Mongoose.model("Buyers", this.schema);
+                this.model = Mongoose.model("buyers", this.schema);
             }
             catch (e) {
                 console.error(e);
@@ -41,13 +41,28 @@ class BuyerModel {
     }
     retrieveBuyerInfo(response, value) {
         return __awaiter(this, void 0, void 0, function* () {
-            var query = this.model.findOne({ BuyerId: value });
+            var query = this.model.findOne({ "buyerId": value });
             try {
+                console.log("FUCK THIS SHIT");
                 const result = yield query.exec();
+                console.log(result);
                 response.json(result);
+                console.log("FUCK EVERYTHING");
             }
             catch (e) {
                 console.error(e);
+            }
+        });
+    }
+    retrieveAllBuyers(response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var query = this.model.find({});
+            try {
+                const buyerArray = yield query.exec();
+                response.json(buyerArray);
+            }
+            catch (e) {
+                console.log(e);
             }
         });
     }

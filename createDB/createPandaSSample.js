@@ -40,13 +40,13 @@ shoeCollection.insert(
 }
 )
 
-db.createCollection('buyer')
-buyerCollection = db.getCollection("buyer")
+db.createCollection('buyers')
+buyerCollection = db.getCollection("buyers")
 buyerCollection.remove({})
 buyerCollection.insert(
 {
 	buyerName: "Robert Widjaja",
-	buyerID: "1111",
+	buyerId: "1111",
 	buyerEmail: "gameislife@outlook.com",
 	buyerPassword: "jddsajfafddl111123213",
 	subscriptionID: "0",
@@ -59,7 +59,7 @@ buyerCollection.insert(
 buyerCollection.insert(
 {
 	buyerName: "Veng Leap Chen",
-	buyerID: "1112",
+	buyerId: "1112",
 	buyerEmail: "leapwantsdopeshoe@gmail.com.",
 	buyerPassword: "jddsajfafddl111123213",
 	subscriptionID: "0'",
@@ -72,7 +72,7 @@ buyerCollection.insert(
 buyerCollection.insert(
 	{
 		  buyerName: "Juan Gonzalas",
-		  buyerID: "1113",
+		  buyerId: "1113",
 		  buyerEmail: "forthepeople@icloud.com",
 		  buyerPassword: "jddsajfafddl111123213",
 		  subscriptionID: "0",

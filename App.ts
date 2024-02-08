@@ -43,16 +43,34 @@ class App {
   private routes(): void {
     let router = express.Router();
 
+    // Query All Shoes
     router.get('/app/shoes', async (req, res) => {
       console.log('Query All Shoes');
       await this.Shoes.retrieveAllShoes(res);
     });
 
+    // Query A Single Shoes
     router.get('/app/shoes/:shoeId', async (req, res) => {
       console.log("Query Single Shoe");
       const id = Number(req.params.shoeId);
       await this.Shoes.retrieveShoe(res, id);
     });
+
+    // Query A Buyer Info
+    router.get('/app/buyers/:buyerId', async (req, res) => {
+      console.log("Query Buyer Info");
+      const id = Number(req.params.buyerId);
+
+      await this.Buyers.retrieveBuyerInfo(res, id);
+    });
+
+
+    // Query All Buyers
+    router.get('/app/buyers', async (req, res) => {
+      console.log('Query All Buyers');
+      await this.Buyers.retrieveAllBuyers(res);
+    });
+
 
   //   router.get('/app/list/:listId/count', async (req, res) => {
   //       var id = req.params.listId;

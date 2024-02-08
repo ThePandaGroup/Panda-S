@@ -41,14 +41,26 @@ class App {
     // Configure API endpoints.
     routes() {
         let router = express.Router();
+        // Query All Shoes
         router.get('/app/shoes', (req, res) => __awaiter(this, void 0, void 0, function* () {
             console.log('Query All Shoes');
             yield this.Shoes.retrieveAllShoes(res);
         }));
+        // Query A Single Shoes
         router.get('/app/shoes/:shoeId', (req, res) => __awaiter(this, void 0, void 0, function* () {
             console.log("Query Single Shoe");
             const id = Number(req.params.shoeId);
             yield this.Shoes.retrieveShoe(res, id);
+        }));
+        // Query A Buyer Info
+        router.get('/app/buyers/:buyerId', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log("Query Buyer Info");
+            const id = Number(req.params.buyerId);
+            yield this.Buyers.retrieveBuyerInfo(res, id);
+        }));
+        router.get('/app/buyers', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log('Query All Buyers');
+            yield this.Buyers.retrieveAllBuyers(res);
         }));
         //   router.get('/app/list/:listId/count', async (req, res) => {
         //       var id = req.params.listId;

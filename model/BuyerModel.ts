@@ -1,5 +1,6 @@
 import * as Mongoose from "mongoose";
 import {IBuyer} from '../interfaces/IBuyerModel';
+import { log } from "console";
 
 class BuyerModel {
     public schema:any;
@@ -16,20 +17,20 @@ class BuyerModel {
         this.schema = new Mongoose.Schema(
             {
                 buyerName: String,
-                buyerID: String,
+                buyerId: String,
                 buyerEmail: String,
                 buyerPassword: String,
                 subscriptionID: Number,
                 shippingAddr: String,
                 orderHistory: [String]
-            }, {collection: 'Buyers'}
+            }, {collection: 'buyers'}
         );    
     }
 
     public async createModel() {
         try {
             await Mongoose.connect(this.dbConnectionString);
-            this.model = Mongoose.model<IBuyer>("Buyers", this.schema);
+            this.model = Mongoose.model<IBuyer>("buyers", this.schema);
         }
         catch (e) {
             console.error(e);
@@ -37,7 +38,7 @@ class BuyerModel {
     }
 
     public async retrieveBuyerInfo(response:any, value:number) {
-        var query = this.model.findOne({BuyerId: value});
+        var query = this.model.findOne({"buyerId": value});
         try {
             const result = await query.exec();
             response.json(result) ;
@@ -46,6 +47,18 @@ class BuyerModel {
             console.error(e);
         }
     }
+
+    public async retrieveAllBuyers(response:any) {
+        var query = this.model.find({});
+        try {
+        const buyerArray = await query.exec();
+        response.json(buyerArray);
+        }
+        catch(e) {
+            console.log(e);
+        }
+    }
+
 
     public async retrieveBuyersSub(response:any, value:number) {
         var query = this.model.findAll({subscriptionID: value});
