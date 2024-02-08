@@ -43,11 +43,8 @@ class BuyerModel {
         return __awaiter(this, void 0, void 0, function* () {
             var query = this.model.findOne({ "buyerId": value });
             try {
-                console.log("FUCK THIS SHIT");
                 const result = yield query.exec();
-                console.log(result);
                 response.json(result);
-                console.log("FUCK EVERYTHING");
             }
             catch (e) {
                 console.error(e);

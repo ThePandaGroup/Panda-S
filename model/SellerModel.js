@@ -20,7 +20,7 @@ class SellerModel {
     createSchema() {
         this.schema = new Mongoose.Schema({
             sellerName: String,
-            sellerID: String,
+            sellerId: String,
             sellerEmail: String,
             sellerPassword: String,
             subscriptionID: Number,
@@ -30,7 +30,7 @@ class SellerModel {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield Mongoose.connect(this.dbConnectionString);
-                this.model = Mongoose.model("Seller", this.schema);
+                this.model = Mongoose.model("sellers", this.schema);
             }
             catch (e) {
                 console.error(e);
@@ -39,13 +39,25 @@ class SellerModel {
     }
     retrieveSellerInfo(response, value) {
         return __awaiter(this, void 0, void 0, function* () {
-            var query = this.model.findOne({ SellerId: value });
+            var query = this.model.findOne({ "sellerId": value });
             try {
                 const result = yield query.exec();
                 response.json(result);
             }
             catch (e) {
                 console.error(e);
+            }
+        });
+    }
+    retrieveAllSellers(response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var query = this.model.find({});
+            try {
+                const sellerArray = yield query.exec();
+                response.json(sellerArray);
+            }
+            catch (e) {
+                console.log(e);
             }
         });
     }

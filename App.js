@@ -58,9 +58,21 @@ class App {
             const id = Number(req.params.buyerId);
             yield this.Buyers.retrieveBuyerInfo(res, id);
         }));
+        // Query All Buyers
         router.get('/app/buyers', (req, res) => __awaiter(this, void 0, void 0, function* () {
             console.log('Query All Buyers');
             yield this.Buyers.retrieveAllBuyers(res);
+        }));
+        // Query a Seller Info
+        router.get('/app/sellers/:sellerId', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log("Query Seller Info");
+            const id = Number(req.params.sellerId);
+            yield this.Sellers.retrieveSellerInfo(res, id);
+        }));
+        // Query All Sellers
+        router.get('/app/sellers', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log('Query All Sellers');
+            yield this.Sellers.retrieveAllSellers(res);
         }));
         //   router.get('/app/list/:listId/count', async (req, res) => {
         //       var id = req.params.listId;

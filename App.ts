@@ -72,6 +72,26 @@ class App {
     });
 
 
+
+
+    // Query a Seller Info
+
+    router.get('/app/sellers/:sellerId', async (req, res) => {
+      console.log("Query Seller Info");
+      const id = Number(req.params.sellerId);
+
+      await this.Sellers.retrieveSellerInfo(res, id);
+    });
+
+
+
+    // Query All Sellers
+
+    router.get('/app/sellers', async (req, res) => {
+      console.log('Query All Sellers');
+      await this.Sellers.retrieveAllSellers(res);
+    });
+
   //   router.get('/app/list/:listId/count', async (req, res) => {
   //       var id = req.params.listId;
   //       console.log('Query single list with id: ' + id);

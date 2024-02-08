@@ -16,7 +16,7 @@ class SellerModel {
     public createSchema() {
         this.schema = new Mongoose.Schema({
             sellerName: String,
-            sellerID: String,
+            sellerId: String,
             sellerEmail: String,
             sellerPassword: String,
             subscriptionID: Number,
@@ -26,14 +26,14 @@ class SellerModel {
     public async createModel() {
         try {
             await Mongoose.connect(this.dbConnectionString);
-            this.model = Mongoose.model<ISeller>("Seller", this.schema);
+            this.model = Mongoose.model<ISeller>("sellers", this.schema);
         } catch (e) {
             console.error(e);
         }
     }
 
     public async retrieveSellerInfo(response:any, value:number) {
-        var query = this.model.findOne({SellerId: value});
+        var query = this.model.findOne({"sellerId": value});
         try {
             const result = await query.exec();
             response.json(result) ;
@@ -42,6 +42,19 @@ class SellerModel {
             console.error(e);
         }
     }
+
+
+    public async retrieveAllSellers(response:any) {
+        var query = this.model.find({});
+        try {
+        const sellerArray = await query.exec();
+        response.json(sellerArray);
+        }
+        catch(e) {
+            console.log(e);
+        }
+    }
+
 
 }
 

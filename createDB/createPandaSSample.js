@@ -12,7 +12,7 @@ shoeCollection.insert(
 	shoeRating: 4.5,
 	sellerId: "3599",
 	shoePrice: 39.99,
-	storeID: "80299"
+	storeId: "80299"
 }
 )
 shoeCollection.insert(
@@ -24,7 +24,7 @@ shoeCollection.insert(
 	shoeRating: 4.5,
 	sellerId: "3599",
 	shoePrice: 39.99,
-	storeID: "80299"
+	storeId: "80299"
 }
 )
 shoeCollection.insert(
@@ -36,7 +36,7 @@ shoeCollection.insert(
 	shoeRating: 4.5,
 	sellerId: "3599",
 	shoePrice: 39.99,
-	storeID: "80299"
+	storeId: "80299"
 }
 )
 
@@ -49,7 +49,7 @@ buyerCollection.insert(
 	buyerId: "1111",
 	buyerEmail: "gameislife@outlook.com",
 	buyerPassword: "jddsajfafddl111123213",
-	subscriptionID: "0",
+	subscriptionId: "0",
 	shippingAddr: "some random streets some random city some random state 98001",
 	orderHistory: [],
 	cart: []
@@ -62,7 +62,7 @@ buyerCollection.insert(
 	buyerId: "1112",
 	buyerEmail: "leapwantsdopeshoe@gmail.com.",
 	buyerPassword: "jddsajfafddl111123213",
-	subscriptionID: "0'",
+	subscriptionId: "0'",
 	shippingAddr: "some random streets some random city some random state 98001",
 	orderHistory: [],
 	cart: []
@@ -75,7 +75,7 @@ buyerCollection.insert(
 		  buyerId: "1113",
 		  buyerEmail: "forthepeople@icloud.com",
 		  buyerPassword: "jddsajfafddl111123213",
-		  subscriptionID: "0",
+		  subscriptionId: "0",
 		  shippingAddr: "some random streets some random city some random state 98001",
 		  orderHistory: [],
 			cart: []
@@ -84,17 +84,17 @@ buyerCollection.insert(
 	
 
 
-db.createCollection('seller')
-sellerCollection = db.getCollection("seller")
+db.createCollection('sellers')
+sellerCollection = db.getCollection("sellers")
 sellerCollection.remove({})
 sellerCollection.insert(
 {
 	sellerName: "Canada Goose",
-	sellerID: "0",
+	sellerId: "0",
 	sellerEmail: "letsgoose@goose.org",
 	sellerPassword: "jddsajfafddl111123213",
-	subscriptionID: "3",
-	storeID: "181818",
+	subscriptionId: "3",
+	storeId: "181818",
 	invList: [],
 	salesHistory: []
 
@@ -104,11 +104,11 @@ sellerCollection.insert(
 sellerCollection.insert(
 {
 	sellerName: "Apple",
-	sellerID: "1",
+	sellerId: "1",
 	sellerEmail: "apple@icloud.com",
 	sellerPassword: "jddsajfafddl111123213",
-	subscriptionID: "3",
-	storeID: "181819",
+	subscriptionId: "3",
+	storeId: "181819",
 	invList: [],
 	salesHistory: []
 
@@ -118,11 +118,11 @@ sellerCollection.insert(
 sellerCollection.insert(
 {
 	sellerName: "Laurentia's factory",
-	sellerID: "2",
+	sellerId: "2",
 	sellerEmail: "carmel@gmail.com",
 	sellerPassword: "jddsajfafddl111123213",
-	subscriptionID: "3",
-	storeID: "181820",
+	subscriptionId: "3",
+	storeId: "181820",
 	invList: [],
 	salesHistory: []
 
@@ -135,8 +135,8 @@ sellerCollection = db.getCollection("storefront")
 sellerCollection.remove({})
 sellerCollection.insert(
 {
-	sellerID: "0",
-	storeID: "181818",
+	sellerId: "0",
+	storeId: "181818",
 	invList: [],
 	salesHistory: [],
 	storePic: "canadaPic.png"
@@ -145,8 +145,8 @@ sellerCollection.insert(
 
 sellerCollection.insert(
 	{
-		sellerID: "1",
-		storeID: "181819",
+		sellerId: "1",
+		storeId: "181819",
 		invList: [],
 		salesHistory: [],
 		storePic: "appleLogo.png"
@@ -155,8 +155,8 @@ sellerCollection.insert(
 
 sellerCollection.insert(
 	{
-		sellerID: "2",
-		storeID: "181820",
+		sellerId: "2",
+		storeId: "181820",
 		invList: [],
 		salesHistory: [],
 		storePic: "lineWork.png"

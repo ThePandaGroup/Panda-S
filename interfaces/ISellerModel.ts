@@ -2,7 +2,7 @@ import Mongoose from "mongoose";
 
 interface ISeller extends Mongoose.Document {
     sellerName: string;
-    sellerID: string;
+    sellerId: string;
     sellerEmail: string;
     sellerPassword: string;
     subscriptionID: number;
