@@ -19,7 +19,7 @@ class StorefrontModel {
         storeID: String,
         invList: [String],
         salesHistory: [String],
-      }, {collection: 'shoes'}
+      }, {collection: 'storefront'}
     );
   }
 
@@ -32,6 +32,32 @@ class StorefrontModel {
         console.error(e);
     }
   }
+  public async retrieveHistoryCount(response:any) {
+    console.log("retrieving History Sales Count ...");
+    var query = this.model.invList.estimatedDocumentCount();
+    try {
+      const numberOfSoldShoes = await query.exec();
+      console.log("numberOfShoes: " + numberOfSoldShoes);
+      response.json(numberOfSoldShoes);
+    }
+    catch (e) {
+        console.error(e);
+    }
+  }
+
+  public async addShoeToInv(response:any, sellerId: number, shoeId: number) {
+    console.log("Adding Shoe to Inventory ...");
+    var query = this.model.update({SellerID: sellerId}, {$push:{invList: shoeId}});
+    try {
+      const result = await query.exec();
+      console.log(shoeId + "shoe added.");
+      response.json(result);
+    }
+    catch (e) {
+        console.error(e);
+    }
+  }
+
 }
 
 export {StorefrontModel};

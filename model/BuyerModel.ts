@@ -57,12 +57,15 @@ class BuyerModel {
             console.error(e);
         }
     }
-    
+
     public async addToCart(response:any, value: number, id: string){
         var query = this.model.update({BuyerId: value}, {$push: {cart: id}})
         try {
+            console.log("Adding to Cart...")
             const result = await query.exec();
             response.json(result) ;
+            console.log("Added to Cart!")
+
         }
         catch (e) {
             console.error(e)
