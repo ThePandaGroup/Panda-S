@@ -46,11 +46,10 @@ var StorefrontModel = /** @class */ (function () {
     }
     StorefrontModel.prototype.createSchema = function () {
         this.schema = new Mongoose.Schema({
-            sellerID: Number,
-            storeID: Number,
-            invList: [{ type: Number }],
-            salesHistory: [{ type: Number }],
-            storePic: Buffer
+            sellerID: String,
+            storeID: String,
+            invList: [String],
+            salesHistory: [String],
         }, { collection: 'shoes' });
     };
     StorefrontModel.prototype.createModel = function () {

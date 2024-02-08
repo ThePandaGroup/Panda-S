@@ -1,11 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+    <head>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <title>Product Page</title>
+    </head>
+
+    <body>
+
+    <div class="container">
+
+        <!-- Static navbar -->
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                      <span class="font-weight-bold">Panda-S</span>
+                    </a>
+                </div>
+          
+              <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                    <li><a href="/featured">Featured</a></li>
+                    <li><a href="/sale">Sale</a></li>
+                    <li><a href="/forum">Forum</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-user"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>          
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="image-container" style="width: 100%; height: 300px;"> <!-- Inline style for demonstration -->
+                        <img src="assets/no_img.png" alt="Product Image" class="img-fluid d-block" style="max-width: 100%; max-height: 100%;">
+                    </div>
+                </div>
+          
+                <div class="col-md-6">
+                    <div class="row">
+                    <div class="col-12">
+                        <h2>Product Name</h2>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-12">
+                        <p>Price</p>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-12">
+                        <p>★★★★☆</p>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-6">
+                        <p>Quantity [Input Field]</p>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-primary">Buy Now</button>
+                        <button class="btn btn-secondary">Add to Cart</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>          
+          
     
-</body>
+    <!-- Tabs for Product Description and Contact Seller -->
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="productTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Product Description</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact Seller</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="description" role="tabpanel" aria-labelledby="description-tab">
+        <!-- Product Description Content -->
+        </div>
+        <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <!-- Contact Seller Content -->
+        </div>
+    </div>
+
+    <!-- Customer Reviews -->
+    <div class="my-3">
+        <!-- Reviews go here -->
+    </div>
+
+    <!-- Footer here -->
+    
+    </div>
+
+    <!-- Include Bootstrap JS and its dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
 </html>

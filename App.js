@@ -42,6 +42,7 @@ var bodyParser = require("body-parser");
 var BuyerModel_1 = require("./model/BuyerModel");
 var SellerModel_1 = require("./model/SellerModel");
 var ShoeModel_1 = require("./model/ShoeModel");
+var StorefrontModel_1 = require("./model/StorefrontModel");
 // Creates and configures an ExpressJS web server.
 var App = /** @class */ (function () {
     //Run configuration methods on the Express instance.
@@ -52,6 +53,7 @@ var App = /** @class */ (function () {
         this.Buyers = new BuyerModel_1.BuyerModel(mongoDBConnection);
         this.Sellers = new SellerModel_1.SellerModel(mongoDBConnection);
         this.Shoes = new ShoeModel_1.ShoeModel(mongoDBConnection);
+        this.Store = new StorefrontModel_1.StorefrontModel(mongoDBConnection);
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
