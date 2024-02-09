@@ -91,7 +91,6 @@ sellerCollection.insert(
 	sellerEmail: "letsgoose@goose.org",
 	sellerPassword: "jddsajfafddl111123213",
 	subscriptionId: "3",
-	storeId: "181818",
 	invList: [],
 	salesHistory: []
 
@@ -105,7 +104,6 @@ sellerCollection.insert(
 	sellerEmail: "apple@icloud.com",
 	sellerPassword: "jddsajfafddl111123213",
 	subscriptionId: "3",
-	storeId: "181819",
 	invList: [],
 	salesHistory: []
 
@@ -119,7 +117,6 @@ sellerCollection.insert(
 	sellerEmail: "carmel@gmail.com",
 	sellerPassword: "jddsajfafddl111123213",
 	subscriptionId: "3",
-	storeId: "181820",
 	invList: [],
 	salesHistory: []
 
