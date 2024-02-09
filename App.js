@@ -95,6 +95,18 @@ class App {
             const id = Number(req.params.sellerId);
             yield this.Sellers.retrieveSellerInfo(res, id);
         }));
+        // STOREFRONT ROUTE
+        // Query All Storefront
+        router.get('/app/storefronts', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log('Query All Storefront');
+            yield this.Store.retrieveAllStorefronts(res);
+        }));
+        // Query A Storefront
+        router.get('/app/storefronts/:storeId', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log("Query Single Storefront");
+            const id = Number(req.params.storeId);
+            yield this.Store.retrieveStorefront(res, id);
+        }));
         //   router.get('/app/list/:listId/count', async (req, res) => {
         //       var id = req.params.listId;
         //       console.log('Query single list with id: ' + id);

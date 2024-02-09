@@ -107,7 +107,20 @@ class App {
       await this.Sellers.retrieveSellerInfo(res, id);
     });
 
+    // STOREFRONT ROUTE
 
+    // Query All Storefront
+    router.get('/app/storefronts', async (req, res) => {
+      console.log('Query All Storefront');
+      await this.Store.retrieveAllStorefronts(res);
+    });
+
+    // Query A Storefront
+    router.get('/app/storefronts/:storeId', async (req, res) => {
+      console.log("Query Single Storefront");
+      const id = Number(req.params.storeId);
+      await this.Store.retrieveStorefront(res, id);
+    });
 
   //   router.get('/app/list/:listId/count', async (req, res) => {
   //       var id = req.params.listId;

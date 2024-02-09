@@ -15,10 +15,11 @@ class StorefrontModel {
   public createSchema() {
     this.schema = new Mongoose.Schema(
       {
-        sellerID: String,
-        storeID: String,
+        sellerId: String,
+        storeId: String,
         invList: [String],
         salesHistory: [String],
+        storePic: String,
       }, {collection: 'storefront'}
     );
   }
@@ -26,12 +27,35 @@ class StorefrontModel {
   public async createModel() {
     try {
       await Mongoose.connect(this.dbConnectionString);
-      this.model = Mongoose.model<IStorefront>("Storefront", this.schema);
+      this.model = Mongoose.model<IStorefront>("storefront", this.schema);
     }
     catch (e) {
         console.error(e);
     }
   }
+
+  public async retrieveAllStorefronts(response:any) {
+    var query = this.model.find({});
+    try {
+      const storefrontArray = await query.exec();
+      response.json(storefrontArray);
+    }
+    catch(e) {
+      console.log(e);
+    }
+  }
+
+  public async retrieveStorefront(response:any, value:number) {
+    var query = this.model.findOne({"storeId":value});
+    try {
+      const result = await query.exec();
+      response.json(result);
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
   public async retrieveHistoryCount(response:any) {
     console.log("retrieving History Sales Count ...");
     var query = this.model.invList.estimatedDocumentCount();
@@ -47,7 +71,7 @@ class StorefrontModel {
 
   public async addShoeToInv(response:any, sellerId: number, shoeId: number) {
     console.log("Adding Shoe to Inventory ...");
-    var query = this.model.update({SellerID: sellerId}, {$push:{invList: shoeId}});
+    var query = this.model.updateOne({SellerID: sellerId}, {$push:{invList: shoeId}});
     try {
       const result = await query.exec();
       console.log(shoeId + "shoe added.");

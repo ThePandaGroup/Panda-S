@@ -19,20 +19,57 @@ class StorefrontModel {
     }
     createSchema() {
         this.schema = new Mongoose.Schema({
-            sellerID: String,
-            storeID: String,
+            sellerId: String,
+            storeId: String,
             invList: [String],
             salesHistory: [String],
+            storePic: String,
         }, { collection: 'storefront' });
     }
     createModel() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield Mongoose.connect(this.dbConnectionString);
-                this.model = Mongoose.model("Storefront", this.schema);
+                this.model = Mongoose.model("storefront", this.schema);
             }
             catch (e) {
                 console.error(e);
+            }
+        });
+    }
+    retrieveAllStorefronts(response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var query = this.model.find({});
+            try {
+                const storefrontArray = yield query.exec();
+                response.json(storefrontArray);
+            }
+            catch (e) {
+                console.log(e);
+            }
+        });
+    }
+    retrieveStorefront(response, value) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var query = this.model.findOne({ "storeId": value });
+            try {
+                const result = yield query.exec();
+                response.json(result);
+            }
+            catch (e) {
+                console.log(e);
+            }
+        });
+    }
+    retrieveShoe(response, value) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var query = this.model.findOne({ "shoeId": value });
+            try {
+                const result = yield query.exec();
+                response.json(result);
+            }
+            catch (e) {
+                console.log(e);
             }
         });
     }
@@ -53,7 +90,7 @@ class StorefrontModel {
     addShoeToInv(response, sellerId, shoeId) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("Adding Shoe to Inventory ...");
-            var query = this.model.update({ SellerID: sellerId }, { $push: { invList: shoeId } });
+            var query = this.model.updateOne({ SellerID: sellerId }, { $push: { invList: shoeId } });
             try {
                 const result = yield query.exec();
                 console.log(shoeId + "shoe added.");
