@@ -65,20 +65,32 @@ class StorefrontModel {
       response.json(numberOfSoldShoes);
     }
     catch (e) {
-        console.error(e);
+        console.log(e);
     }
   }
 
-  public async addShoeToInv(response:any, sellerId: number, shoeId: number) {
-    console.log("Adding Shoe to Inventory ...");
-    var query = this.model.updateOne({SellerID: sellerId}, {$push:{invList: shoeId}});
+  public async retrieveStorefrontsInv(response:any, value:number) {
+    var query = this.model.findOne({"storeId": value});
     try {
-      const result = await query.exec();
-      console.log(shoeId + "shoe added.");
-      response.json(result);
+        let storeInfo = await query.exec();
+        response.json(storeInfo.invList);
     }
     catch (e) {
-        console.error(e);
+        console.log(e);
+    }
+  }
+
+  public async addShoeToInv(response:any, sellerId: number, shoeId: string) {
+    console.log("Adding Shoe to Inventory ...");
+    var query = this.model.updateOne({storeId: sellerId}, {$push:{invList: shoeId}});
+    try {
+      console.log("Adding to Inventory...")
+      const result = await query.exec();
+      response.json(result);
+      console.log("Added to Inventory!")
+    }
+    catch (e) {
+        console.log(e);
     }
   }
 

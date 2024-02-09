@@ -67,7 +67,7 @@ class BuyerModel {
             response.json(result) ;
         }
         catch (e) {
-            console.error(e);
+            console.log(e);
         }
     }
 
@@ -78,7 +78,7 @@ class BuyerModel {
             response.json(buyerInfo.cart) ;
         }
         catch (e) {
-            console.error(e);
+            console.log(e);
         }
     }
 
@@ -92,10 +92,10 @@ class BuyerModel {
 
         }
         catch (e) {
-            console.error(e)
+            console.log(e)
         }
     }
 
-    }
+}
 
 export {BuyerModel};

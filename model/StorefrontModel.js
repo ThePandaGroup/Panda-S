@@ -61,18 +61,6 @@ class StorefrontModel {
             }
         });
     }
-    retrieveShoe(response, value) {
-        return __awaiter(this, void 0, void 0, function* () {
-            var query = this.model.findOne({ "shoeId": value });
-            try {
-                const result = yield query.exec();
-                response.json(result);
-            }
-            catch (e) {
-                console.log(e);
-            }
-        });
-    }
     retrieveHistoryCount(response) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("retrieving History Sales Count ...");
@@ -83,21 +71,34 @@ class StorefrontModel {
                 response.json(numberOfSoldShoes);
             }
             catch (e) {
-                console.error(e);
+                console.log(e);
+            }
+        });
+    }
+    retrieveStorefrontsInv(response, value) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var query = this.model.findOne({ "storeId": value });
+            try {
+                let storeInfo = yield query.exec();
+                response.json(storeInfo.invList);
+            }
+            catch (e) {
+                console.log(e);
             }
         });
     }
     addShoeToInv(response, sellerId, shoeId) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("Adding Shoe to Inventory ...");
-            var query = this.model.updateOne({ SellerID: sellerId }, { $push: { invList: shoeId } });
+            var query = this.model.updateOne({ storeId: sellerId }, { $push: { invList: shoeId } });
             try {
+                console.log("Adding to Inventory...");
                 const result = yield query.exec();
-                console.log(shoeId + "shoe added.");
                 response.json(result);
+                console.log("Added to Inventory!");
             }
             catch (e) {
-                console.error(e);
+                console.log(e);
             }
         });
     }

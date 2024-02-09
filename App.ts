@@ -122,17 +122,30 @@ class App {
       await this.Store.retrieveStorefront(res, id);
     });
 
-  //   router.get('/app/list/:listId/count', async (req, res) => {
-  //       var id = req.params.listId;
-  //       console.log('Query single list with id: ' + id);
-  //       await this.Tasks.retrieveTasksCount(res, {listId: id});
-  //   });
+    // Query A Storefront's Sales History
+    // router.get('/app/storefronts/:storeId/history', async (req, res) => {
+    //   const id = Number(req.params.storeId);
+    //   console.log("Query Storefront's Sales History with id: " + id);
+    //   await this.Store.retrieveHistoryCount(res, id);
+    // });
 
-  //   router.get('/app/list/:listId', async (req, res) => {
-  //     var id = req.params.listId;
-  //     console.log('Query single list with id: ' + id);
-  //     await this.Lists.retrieveLists(res, id);
-  //   });
+    // Query A Storefront's Inventory
+    router.get('/app/storefronts/:storeId/inventory', async (req, res) => {
+      const id = Number(req.params.storeId);
+      console.log("Query Storefront's Inventory with id: " + id);
+      await this.Store.retrieveStorefrontsInv(res, id);
+    });
+
+    // Add Shoe to Storefront's Inventory
+    router.post('/app/storefronts/:storeId/inventory/:shoeId', async (req, res) => {
+      let shoeId = req.params.shoeId;
+      const storeId = Number(req.params.storeId);
+      try {
+          await this.Store.addShoeToInv(res, storeId, shoeId);
+      } catch(err) {
+          console.log(`Error in adding an Item to the inventory ${err}`);
+      };
+    })
 
   //   router.post('/app/list/', async (req, res) => {
   //     const id = crypto.randomBytes(16).toString("hex");
