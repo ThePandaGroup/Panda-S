@@ -58,6 +58,12 @@ class App {
       await this.Shoes.retrieveShoe(res, id);
     });
 
+    // Query Shoe Count
+    router.get('/app/shoes/count/total', async (req, res) => {
+      console.log("Query Shoe Count");
+      await this.Shoes.retrieveShoeCount(res);
+    });
+
     // BUYER ROUTE
 
     // Query All Buyers

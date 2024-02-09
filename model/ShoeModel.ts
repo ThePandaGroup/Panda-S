@@ -60,14 +60,14 @@ class ShoeModel {
 
   public async retrieveShoeCount(response:any) {
     console.log("retrieve Shoe Count ...");
-    var query = this.model.estimatedDocumentCount();
+    var query = this.model.find({});
     try {
-      const numberOfShoes = await query.exec();
-      console.log("numberOfShoes: " + numberOfShoes);
-      response.json(numberOfShoes);
+      const shoesArray = await query.exec();
+      response.json(shoesArray.length);
+      console.log("numberOfShoes: " + shoesArray.length);
     }
-    catch (e) {
-        console.error(e);
+    catch(e) {
+        console.log(e);
     }
   }
 }

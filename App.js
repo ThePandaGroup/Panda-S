@@ -54,6 +54,11 @@ class App {
             const id = Number(req.params.shoeId);
             yield this.Shoes.retrieveShoe(res, id);
         }));
+        // Query Shoe Count
+        router.get('/app/shoes/count/total', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log("Query Shoe Count");
+            yield this.Shoes.retrieveShoeCount(res);
+        }));
         // BUYER ROUTE
         // Query All Buyers
         router.get('/app/buyers', (req, res) => __awaiter(this, void 0, void 0, function* () {
