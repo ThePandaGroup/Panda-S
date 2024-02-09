@@ -156,16 +156,21 @@ class App {
             yield this.Store.retrieveInvCount(res, id);
         }));
         // Add Shoe to Storefront's Inventory
-        router.post('/app/storefronts/:storeId/inventory/:shoeId', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            let shoeId = req.params.shoeId;
-            const storeId = Number(req.params.storeId);
+        router.post('/app/storefronts/:storeId/inventory/add/', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log("Adding a New Shoe");
+            let storeId = Number(req.params.storeId);
+            const id = crypto.randomBytes(16).toString("hex");
+            console.log(req.body);
+            var jsonObj = req.body;
+            const doc = new this.Shoes.model(jsonObj);
             try {
-                yield this.Store.addShoeToInv(res, storeId, shoeId);
+                yield doc.save();
+                yield this.Store.addShoeToInv(res, storeId, jsonObj.shoeId);
+                res.send();
             }
-            catch (err) {
-                console.log(`Error in adding an Item to the inventory ${err}`);
+            catch (e) {
+                console.log(e);
             }
-            ;
         }));
         this.expressApp.use('/', router);
         //   this.expressApp.use('/app/json/', express.static(__dirname+'/app/json'));

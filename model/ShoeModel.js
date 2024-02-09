@@ -63,18 +63,6 @@ class ShoeModel {
             }
         });
     }
-    // public async retrieveShoeCount(response:any) {
-    //   console.log("retrieve Shoe Count ...");
-    //   var query = this.model.estimatedDocumentCount();
-    //   try {
-    //     const numberOfShoes = await query.exec();
-    //     console.log("numberOfShoes: " + numberOfShoes);
-    //     response.json(numberOfShoes);
-    //   }
-    //   catch (e) {
-    //       console.error(e);
-    //   }
-    // }
     retrieveShoeCount(response) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("retrieve Shoe Count ...");

@@ -174,15 +174,22 @@ class App {
     });
 
     // Add Shoe to Storefront's Inventory
-    router.post('/app/storefronts/:storeId/inventory/:shoeId', async (req, res) => {
-      let shoeId = req.params.shoeId;
-      const storeId = Number(req.params.storeId);
+    router.post('/app/storefronts/:storeId/inventory/add/', async (req, res) => {
+      console.log("Adding a New Shoe");
+      let storeId = Number(req.params.storeId);
+      const id = crypto.randomBytes(16).toString("hex");
+      console.log(req.body);
+      var jsonObj = req.body;
+      const doc = new this.Shoes.model(jsonObj);
       try {
-          await this.Store.addShoeToInv(res, storeId, shoeId);
-      } catch(err) {
-          console.log(`Error in adding an Item to the inventory ${err}`);
-      };
-    })
+          await doc.save();
+          await this.Store.addShoeToInv(res, storeId, jsonObj.shoeId);
+          res.send();
+      }
+      catch (e) {
+          console.log(e);
+      }
+    });
 
 
   this.expressApp.use('/', router);
