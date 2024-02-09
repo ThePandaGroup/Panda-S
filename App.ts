@@ -91,6 +91,22 @@ class App {
       };
     })
 
+    router.post('/app/buyers/', async (req, res) => {
+      console.log("Adding a New Buyer");
+      const id = crypto.randomBytes(16).toString("hex");
+      console.log(req.body);
+      var jsonObj = req.body;
+      jsonObj.userId = id;
+      const doc = new this.Buyers.model(jsonObj);
+      try {
+        await doc.save();
+        res.send('Buyer created successfully-id: ' + id);
+      }
+      catch (e) {
+        console.log(e);
+      }
+    });
+
     // SELLER ROUTE
 
     // Query All Sellers
@@ -103,8 +119,23 @@ class App {
     router.get('/app/sellers/:sellerId', async (req, res) => {
       console.log("Query Seller Info");
       const id = Number(req.params.sellerId);
-
       await this.Sellers.retrieveSellerInfo(res, id);
+    });
+
+    router.post('/app/sellers/', async (req, res) => {
+      console.log("Adding a New Seller");
+      const id = crypto.randomBytes(16).toString("hex");
+      console.log(req.body);
+      var jsonObj = req.body;
+      jsonObj.userId = id;
+      const doc = new this.Sellers.model(jsonObj);
+      try {
+        await doc.save();
+        res.send('Seller created successfully-id: ' + id);
+      }
+      catch (e) {
+        console.log(e);
+      }
     });
 
     // STOREFRONT ROUTE

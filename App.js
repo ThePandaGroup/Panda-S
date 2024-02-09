@@ -16,6 +16,7 @@ const BuyerModel_1 = require("./model/BuyerModel");
 const SellerModel_1 = require("./model/SellerModel");
 const ShoeModel_1 = require("./model/ShoeModel");
 const StorefrontModel_1 = require("./model/StorefrontModel");
+const crypto = require("crypto");
 // Creates and configures an ExpressJS web server.
 class App {
     //Run configuration methods on the Express instance.
@@ -83,6 +84,21 @@ class App {
             }
             ;
         }));
+        router.post('/app/buyers/', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log("Adding a New Buyer");
+            const id = crypto.randomBytes(16).toString("hex");
+            console.log(req.body);
+            var jsonObj = req.body;
+            jsonObj.userId = id;
+            const doc = new this.Buyers.model(jsonObj);
+            try {
+                yield doc.save();
+                res.send('Buyer created successfully-id: ' + id);
+            }
+            catch (e) {
+                console.log(e);
+            }
+        }));
         // SELLER ROUTE
         // Query All Sellers
         router.get('/app/sellers', (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -94,6 +110,21 @@ class App {
             console.log("Query Seller Info");
             const id = Number(req.params.sellerId);
             yield this.Sellers.retrieveSellerInfo(res, id);
+        }));
+        router.post('/app/sellers/', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log("Adding a New Seller");
+            const id = crypto.randomBytes(16).toString("hex");
+            console.log(req.body);
+            var jsonObj = req.body;
+            jsonObj.userId = id;
+            const doc = new this.Sellers.model(jsonObj);
+            try {
+                yield doc.save();
+                res.send('Seller created successfully-id: ' + id);
+            }
+            catch (e) {
+                console.log(e);
+            }
         }));
         // STOREFRONT ROUTE
         // Query All Storefront
