@@ -122,18 +122,18 @@ class App {
       await this.Store.retrieveStorefront(res, id);
     });
 
-    // Query A Storefront's Sales History
-    // router.get('/app/storefronts/:storeId/history', async (req, res) => {
-    //   const id = Number(req.params.storeId);
-    //   console.log("Query Storefront's Sales History with id: " + id);
-    //   await this.Store.retrieveHistoryCount(res, id);
-    // });
-
     // Query A Storefront's Inventory
     router.get('/app/storefronts/:storeId/inventory', async (req, res) => {
       const id = Number(req.params.storeId);
       console.log("Query Storefront's Inventory with id: " + id);
       await this.Store.retrieveStorefrontsInv(res, id);
+    });
+
+    // Query A Storefront's Inventory Count
+    router.get('/app/storefronts/:storeId/inventory/count', async (req, res) => {
+      const id = Number(req.params.storeId);
+      console.log("Query Storefront's Inventory count with id: " + id);
+      await this.Store.retrieveInvCount(res, id);
     });
 
     // Add Shoe to Storefront's Inventory
@@ -147,52 +147,6 @@ class App {
       };
     })
 
-  //   router.post('/app/list/', async (req, res) => {
-  //     const id = crypto.randomBytes(16).toString("hex");
-  //     console.log(req.body);
-  //       var jsonObj = req.body;
-  //       jsonObj.listId = id;
-  //       try {
-  //         await this.Lists.model.create([jsonObj]);
-  //         res.send('{"id":"' + id + '"}');
-  //       }
-  //       catch (e) {
-  //         console.error(e);
-  //         console.log('object creation failed');
-  //       }
-  //   });
-
-  //   router.post('/app/list2/', async (req, res) => {
-  //     const id = crypto.randomBytes(16).toString("hex");
-  //     console.log(req.body);
-  //       var jsonObj = req.body;
-  //       jsonObj.listId = id;
-  //       const doc = new this.Lists.model(jsonObj);
-  //       try {
-  //         await doc.save();
-  //         res.send('{"id":"' + id + '"}');
-  //       }
-  //       catch (e) {
-  //         console.log('object creation failed');
-  //         console.error(e);
-  //       }        
-  //   });
-
-  //   router.get('/app/list/:listId', async (req, res) => {
-  //       var id = req.params.listId;
-  //       console.log('Query single list with id: ' + id);
-  //       await this.Tasks.retrieveTasksDetails(res, {listId: id});
-  //   });
-
-  //   router.get('/app/list/', async (req, res) => {
-  //       console.log('Query All list');
-  //       await this.Lists.retrieveAllLists(res);
-  //   });
-
-  //   router.get('/app/listcount', async (req, res) => {
-  //     console.log('Query the number of list elements in db');
-  //     await this.Lists.retrieveListCount(res);
-  //   });
 
   this.expressApp.use('/', router);
 

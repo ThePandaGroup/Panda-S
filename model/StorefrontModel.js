@@ -61,14 +61,18 @@ class StorefrontModel {
             }
         });
     }
-    retrieveHistoryCount(response) {
+    retrieveInvCount(response, storeId) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("retrieving History Sales Count ...");
-            var query = this.model.invList.estimatedDocumentCount();
+            const store = yield this.model.findOne({ storeId: storeId });
             try {
-                const numberOfSoldShoes = yield query.exec();
-                console.log("numberOfShoes: " + numberOfSoldShoes);
-                response.json(numberOfSoldShoes);
+                if (!store) {
+                    console.log("No store found with this ID");
+                }
+                else {
+                    const numberOfShoes = store.invList.length;
+                    response.json(numberOfShoes);
+                }
             }
             catch (e) {
                 console.log(e);
