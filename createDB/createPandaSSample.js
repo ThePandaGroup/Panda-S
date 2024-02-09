@@ -7,10 +7,9 @@ shoeCollection.insert(
 {
 	shoeName: "KungPao Shoe",
 	shoeDescription: "The shoe that will let you destress.",
-	shoeId: "976-2222",
+	shoeId: "2222",
 	shoeSize: 5.5,
 	shoeRating: 4.5,
-	sellerId: "3599",
 	shoePrice: 39.99,
 	storeId: "80299"
 }
@@ -22,7 +21,6 @@ shoeCollection.insert(
 	shoeId: "1",
 	shoeSize: 5.5,
 	shoeRating: 4.5,
-	sellerId: "3599",
 	shoePrice: 39.99,
 	storeId: "80299"
 }
@@ -34,7 +32,6 @@ shoeCollection.insert(
 	shoeId: "2",
 	shoeSize: 5.5,
 	shoeRating: 4.5,
-	sellerId: "3599",
 	shoePrice: 39.99,
 	storeId: "80299"
 }
@@ -156,8 +153,8 @@ sellerCollection.insert(
 sellerCollection.insert(
 	{
 		sellerId: "2",
-		storeId: "181820",
-		invList: [],
+		storeId: "80299",
+		invList: ["2222", "1", "2"],
 		salesHistory: [],
 		storePic: "lineWork.png"
 	}

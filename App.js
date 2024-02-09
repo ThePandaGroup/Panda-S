@@ -107,18 +107,13 @@ class App {
             const id = Number(req.params.storeId);
             yield this.Store.retrieveStorefront(res, id);
         }));
-        // Query A Storefront's Sales History
-        // router.get('/app/storefronts/:storeId/history', async (req, res) => {
-        //   const id = Number(req.params.storeId);
-        //   console.log("Query Storefront's Sales History with id: " + id);
-        //   await this.Store.retrieveHistoryCount(res, id);
-        // });
         // Query A Storefront's Inventory
         router.get('/app/storefronts/:storeId/inventory', (req, res) => __awaiter(this, void 0, void 0, function* () {
             const id = Number(req.params.storeId);
             console.log("Query Storefront's Inventory with id: " + id);
             yield this.Store.retrieveStorefrontsInv(res, id);
         }));
+        // Query A Storefront's Inventory Count
         router.get('/app/storefronts/:storeId/inventory/count', (req, res) => __awaiter(this, void 0, void 0, function* () {
             const id = Number(req.params.storeId);
             console.log("Query Storefront's Inventory count with id: " + id);
@@ -136,10 +131,6 @@ class App {
             }
             ;
         }));
-        //   router.get('/app/listcount', async (req, res) => {
-        //     console.log('Query the number of list elements in db');
-        //     await this.Lists.retrieveListCount(res);
-        //   });
         this.expressApp.use('/', router);
         //   this.expressApp.use('/app/json/', express.static(__dirname+'/app/json'));
         //   this.expressApp.use('/images', express.static(__dirname+'/img'));
