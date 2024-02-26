@@ -20,7 +20,7 @@ class ShoeModel {
         shoeId: String,
         shoeSize: Number,
         shoeRating: Number,
-        storeId: Number,
+        storeId: String,
         shoePrice: Number,
         shoeQuantity: Number,
       }, {collection: 'shoes'}

@@ -6,7 +6,7 @@ interface IShoe extends Mongoose.Document {
     shoeId: string;
     shoeSize: number;
     shoeRating: number;
-    storeId: number;
+    storeId: string;
     shoePrice: number;
     shoeQuantity: number;
 }
