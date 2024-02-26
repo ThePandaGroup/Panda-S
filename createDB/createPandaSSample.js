@@ -17,7 +17,7 @@ shoeCollection.insert(
 shoeCollection.insert(
 {
 	shoeName: "Geo shoe",
-	shoeDescription: "A shoe that prevents",
+	shoeDescription: "A shoe that prevents you from getting lost.",
 	shoeId: "1",
 	shoeSize: 5.5,
 	shoeRating: 4.5,
