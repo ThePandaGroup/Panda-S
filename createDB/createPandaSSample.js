@@ -112,7 +112,7 @@ sellerCollection.insert(
 
 sellerCollection.insert(
 {
-	sellerName: "Laurentia's factory",
+	sellerName: "Laurentia",
 	sellerId: "2",
 	sellerEmail: "carmel@gmail.com",
 	sellerPassword: "jddsajfafddl111123213",
@@ -131,6 +131,8 @@ sellerCollection.insert(
 {
 	sellerId: "0",
 	storeId: "181818",
+	storeName: "Canada Goose",
+	storeDescription: "The best place to get your winter gear.",
 	invList: [],
 	salesHistory: [],
 	storePic: "canadaPic.png"
@@ -141,6 +143,8 @@ sellerCollection.insert(
 	{
 		sellerId: "1",
 		storeId: "181819",
+		storeName: "Apple Store",
+		storeDescription: "edible shoes to keep you running",
 		invList: [],
 		salesHistory: [],
 		storePic: "appleLogo.png"
@@ -151,6 +155,8 @@ sellerCollection.insert(
 	{
 		sellerId: "2",
 		storeId: "80299",
+		storeName: "Laurentia's Factory",
+		storeDescription: "source of all sketchy shoes in the area, guaranteed to be unique!",
 		invList: ["2222", "1", "2"],
 		salesHistory: [],
 		storePic: "lineWork.png"
