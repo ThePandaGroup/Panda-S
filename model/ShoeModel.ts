@@ -21,7 +21,8 @@ class ShoeModel {
         shoeSize: Number,
         shoeRating: Number,
         storeId: String,
-        shoePrice: Number
+        shoePrice: Number,
+        shoeQuantity: Number,
       }, {collection: 'shoes'}
     );
   }
