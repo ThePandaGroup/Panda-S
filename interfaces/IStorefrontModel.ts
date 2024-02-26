@@ -1,8 +1,8 @@
 import Mongoose from "mongoose";
 
 interface IStorefront extends Mongoose.Document {
-    sellerID: string;
-    storeID: string;
+    sellerId: string;
+    storeId: string;
     storeName: string;
     storeDescription: string;
     invList: string[];

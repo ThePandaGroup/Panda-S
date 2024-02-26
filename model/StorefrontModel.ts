@@ -17,6 +17,8 @@ class StorefrontModel {
       {
         sellerId: String,
         storeId: String,
+        storeName: String,
+        storeDescription: String,
         invList: [String],
         salesHistory: [String],
         storePic: String,
