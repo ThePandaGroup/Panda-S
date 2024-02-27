@@ -119,7 +119,7 @@ class BuyerModel {
                 }
             }), 15000);
             // response.send('Shoe added to cart');
-            response.send(shoe.shoeName + ' added to ' + buyer.buyerName + '\'s cart');
+            response.json({ message: shoe.shoeName + ' added to ' + buyer.buyerName + '\'s cart' });
         });
     }
 }
