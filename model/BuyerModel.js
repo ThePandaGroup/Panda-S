@@ -12,10 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BuyerModel = void 0;
 const Mongoose = require("mongoose");
 class BuyerModel {
-    constructor(DB_CONNECTION_STRING) {
+    constructor(DB_CONNECTION_STRING, shoes) {
         this.dbConnectionString = DB_CONNECTION_STRING;
         this.createSchema();
         this.createModel();
+        this.addToCart = this.addToCart.bind(this);
+        this.shoes = shoes;
     }
     createSchema() {
         this.schema = new Mongoose.Schema({
@@ -26,7 +28,7 @@ class BuyerModel {
             subscriptionID: Number,
             shippingAddr: String,
             orderHistory: [String],
-            cart: [String],
+            cart: [{ shoeID: String, addedAt: Date }],
         }, { collection: 'buyers' });
     }
     createModel() {
@@ -88,18 +90,36 @@ class BuyerModel {
             }
         });
     }
-    addToCart(response, value, id) {
+    addToCart(response, buyerId, shoeId) {
         return __awaiter(this, void 0, void 0, function* () {
-            var query = this.model.updateOne({ buyerId: value }, { $push: { cart: id } });
-            try {
-                console.log("Adding to Cart...");
-                const result = yield query.exec();
-                response.json(result);
-                console.log("Added to Cart!");
+            // Find the buyer and the shoe
+            const buyer = yield this.model.findOne({ buyerId: buyerId });
+            const shoe = yield this.shoes.getShoe(shoeId);
+            if (!buyer || !shoe) {
+                return response.status(404).send('Buyer or Shoe not found');
             }
-            catch (e) {
-                console.log(e);
+            if (shoe.shoeQuantity < 1) {
+                return response.status(400).send('Shoe is out of stock');
             }
+            // Decrease the shoe quantity and add it to the buyer's cart
+            shoe.shoeQuantity -= 1;
+            buyer.cart.push({ shoeID: shoeId, addedAt: new Date() });
+            yield shoe.save();
+            yield buyer.save();
+            // Start a timer to remove the shoe from the cart if not purchased within 30 seconds
+            setTimeout(() => __awaiter(this, void 0, void 0, function* () {
+                const buyerRefreshed = yield this.model.findOne({ buyerId: buyerId });
+                const shoeRefreshed = yield this.shoes.getShoe(shoeId);
+                const index = buyerRefreshed.cart.findIndex(item => item.shoeID === shoeId);
+                if (index > -1) {
+                    buyerRefreshed.cart.splice(index, 1);
+                    shoeRefreshed.shoeQuantity += 1;
+                    yield buyerRefreshed.save();
+                    yield shoeRefreshed.save();
+                }
+            }), 15000);
+            // response.send('Shoe added to cart');
+            response.send(shoe.shoeName + ' added to ' + buyer.buyerName + '\'s cart');
         });
     }
 }

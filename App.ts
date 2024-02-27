@@ -22,10 +22,12 @@ class App {
     this.expressApp = express();
     this.middleware();
     this.routes();
-    this.Buyers = new BuyerModel(mongoDBConnection);
+  
     this.Sellers = new SellerModel(mongoDBConnection);
     this.Shoes = new ShoeModel(mongoDBConnection);
     this.Store = new StorefrontModel(mongoDBConnection);
+
+    this.Buyers = new BuyerModel(mongoDBConnection, this.Shoes);
   }
 
   // Configure Express middleware.
@@ -64,6 +66,14 @@ class App {
       await this.Shoes.retrieveShoeCount(res);
     });
 
+    // Add shoe to cart
+    // router.post('/app/add-to-cart/:buyerId/:shoeId', async (req, res) => {
+    //   let shoeId = req.params.shoeId;
+    //   const buyerId = Number(req.params.buyerId);
+    //   await this.Buyers.addToCart(res, buyerId, shoeId);
+    // });
+
+
     // BUYER ROUTE
 
     // Query All Buyers
@@ -92,6 +102,7 @@ class App {
       const buyerId = Number(req.params.buyerId);
       try {
           await this.Buyers.addToCart(res, buyerId, shoeId);
+          console.log("Added to cart");
       } catch(err) {
           console.log(`Error in adding an Item to the cart ${err}`);
       };

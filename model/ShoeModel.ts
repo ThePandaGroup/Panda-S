@@ -71,6 +71,20 @@ class ShoeModel {
         console.log(e);
     }
   }
+
+
+
+  public async getShoe(shoeId: string) {
+    var query = this.model.findOne({"shoeId": shoeId});
+    try {
+        const result = await query.exec();
+        return result;
+    }
+    catch (e) {
+        console.log(e);
+        return null;
+    }
+  }
 }
 
 export {ShoeModel};

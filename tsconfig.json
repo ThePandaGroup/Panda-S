@@ -1,15 +1,3 @@
-// {
-//   "compilerOptions": {
-//     "target": "es6",
-//     "module": "commonjs"
-//   },
-//   "include": [
-//     "**/*.ts"
-//   ],
-//   "exclude": [
-//     "node_modules"
-//   ]
-// }
 {
   "compilerOptions": {
     "module": "commonjs",

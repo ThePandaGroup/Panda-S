@@ -1,5 +1,12 @@
 import Mongoose from "mongoose";
 
+interface CartItem {
+    shoeID: string;
+    addedAt: Date;
+}
+
+
+
 interface IBuyer extends Mongoose.Document {
     buyerName: string;
     buyerId: string;
@@ -8,7 +15,7 @@ interface IBuyer extends Mongoose.Document {
     subscriptionID: number;
     shippingAddr: string;
     orderHistory: string[];
-    cart: string[];
+    cart: CartItem[];
 }
 
 export {IBuyer};

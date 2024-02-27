@@ -21,6 +21,8 @@ class StorefrontModel {
         this.schema = new Mongoose.Schema({
             sellerId: String,
             storeId: String,
+            storeName: String,
+            storeDescription: String,
             invList: [String],
             salesHistory: [String],
             storePic: String,

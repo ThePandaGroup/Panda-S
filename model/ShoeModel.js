@@ -25,7 +25,8 @@ class ShoeModel {
             shoeSize: Number,
             shoeRating: Number,
             storeId: String,
-            shoePrice: Number
+            shoePrice: Number,
+            shoeQuantity: Number,
         }, { collection: 'shoes' });
     }
     createModel() {
@@ -74,6 +75,19 @@ class ShoeModel {
             }
             catch (e) {
                 console.log(e);
+            }
+        });
+    }
+    getShoe(shoeId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var query = this.model.findOne({ "shoeId": shoeId });
+            try {
+                const result = yield query.exec();
+                return result;
+            }
+            catch (e) {
+                console.log(e);
+                return null;
             }
         });
     }
