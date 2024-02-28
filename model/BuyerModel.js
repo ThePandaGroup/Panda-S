@@ -117,7 +117,7 @@ class BuyerModel {
                     yield buyerRefreshed.save();
                     yield shoeRefreshed.save();
                 }
-            }), 15000);
+            }), 45000);
             // response.send('Shoe added to cart');
             response.json({ message: shoe.shoeName + ' added to ' + buyer.buyerName + '\'s cart' });
         });

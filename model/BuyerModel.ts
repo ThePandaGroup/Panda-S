@@ -120,7 +120,7 @@ class BuyerModel {
                 await buyerRefreshed.save();
                 await shoeRefreshed.save();
             }
-        }, 15000);
+        }, 45000);
     
         // response.send('Shoe added to cart');
         response.json({ message: shoe.shoeName + ' added to ' + buyer.buyerName + '\'s cart' }); 
