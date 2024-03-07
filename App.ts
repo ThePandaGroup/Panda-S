@@ -6,6 +6,11 @@ import {ShoeModel} from './model/ShoeModel';
 import {StorefrontModel} from './model/StorefrontModel';
 import * as crypto from 'crypto';
 
+import * as passport from 'passport';
+import GooglePassportObj from './GooglePassport';
+import * as session from 'express-session';
+import * as cookieParser from 'cookie-parser';
+
 // Creates and configures an ExpressJS web server.
 class App {
 
@@ -16,9 +21,14 @@ class App {
   public Shoes:ShoeModel;
   public Store:StorefrontModel;
 
+  public googlePassportObj:GooglePassportObj;
+
   //Run configuration methods on the Express instance.
   constructor(mongoDBConnection:string)
   {
+
+    this.googlePassportObj = new GooglePassportObj();
+
     this.expressApp = express();
     this.middleware();
     this.routes();
@@ -39,11 +49,45 @@ class App {
       res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
       next();
     });
+
+    this.expressApp.use(session({ secret: 'keyboard cat' }));
+    this.expressApp.use(cookieParser());
+    this.expressApp.use(passport.initialize());
+    this.expressApp.use(passport.session());
   }
+
+  // Google Auth
+  private validateAuth(req, res, next):void {
+    if (req.isAuthenticated()) { 
+      console.log("user is authenticated"); 
+      console.log(JSON.stringify(req.user));
+      return next(); }
+    console.log("user is not authenticated");
+    res.redirect('/');
+  }
+
+
+  
 
   // Configure API endpoints.
   private routes(): void {
     let router = express.Router();
+
+
+    router.get('/auth/google', 
+    passport.authenticate('google', {scope: ['profile']}));
+
+
+    router.get('/auth/google/callback', 
+    passport.authenticate('google', 
+      { failureRedirect: '/' }
+    ),
+    (req, res) => {
+      console.log("successfully authenticated user and returned to callback page.");
+      console.log("redirecting to /#/list");
+      res.redirect('/#/');
+    }
+  );
 
     // SHOES ROUTES
 
