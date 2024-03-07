@@ -180,9 +180,10 @@ class App {
             }
         }));
         this.expressApp.use('/', router);
-        //   this.expressApp.use('/app/json/', express.static(__dirname+'/app/json'));
-        //   this.expressApp.use('/images', express.static(__dirname+'/img'));
-        this.expressApp.use('/', express.static(__dirname + '/pages'));
+        this.expressApp.use('/app/json/', express.static(__dirname + '/app/json'));
+        this.expressApp.use('/assets', express.static(__dirname + '/pages'));
+        //this.expressApp.use('/', express.static(__dirname+'/pages'));
+        this.expressApp.use('/', express.static(__dirname + '/dist/panda-s/browser'));
     }
 }
 exports.App = App;

@@ -24,7 +24,7 @@ To execute the server db and then the node server, do the following:
 
 //go into the mongo shell
 
-2. mongosh
+2. mongosh -port 3000
 
 //load database
 3. load('createDB/createPandaSSample.js'), load('createDB/createAdminUser.js')
