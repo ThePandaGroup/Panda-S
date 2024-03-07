@@ -17,10 +17,15 @@ const SellerModel_1 = require("./model/SellerModel");
 const ShoeModel_1 = require("./model/ShoeModel");
 const StorefrontModel_1 = require("./model/StorefrontModel");
 const crypto = require("crypto");
+const passport = require("passport");
+const GooglePassport_1 = require("./GooglePassport");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 // Creates and configures an ExpressJS web server.
 class App {
     //Run configuration methods on the Express instance.
     constructor(mongoDBConnection) {
+        this.googlePassportObj = new GooglePassport_1.default();
         this.expressApp = express();
         this.middleware();
         this.routes();
@@ -38,10 +43,30 @@ class App {
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             next();
         });
+        this.expressApp.use(session({ secret: 'keyboard cat' }));
+        this.expressApp.use(cookieParser());
+        this.expressApp.use(passport.initialize());
+        this.expressApp.use(passport.session());
+    }
+    // Google Auth
+    validateAuth(req, res, next) {
+        if (req.isAuthenticated()) {
+            console.log("user is authenticated");
+            console.log(JSON.stringify(req.user));
+            return next();
+        }
+        console.log("user is not authenticated");
+        res.redirect('/');
     }
     // Configure API endpoints.
     routes() {
         let router = express.Router();
+        router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+        router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
+            console.log("successfully authenticated user and returned to callback page.");
+            console.log("redirecting to /#/list");
+            res.redirect('/#/');
+        });
         // SHOES ROUTES
         // Query All Shoes
         router.get('/app/shoes', (req, res) => __awaiter(this, void 0, void 0, function* () {
