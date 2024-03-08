@@ -112,7 +112,7 @@ class BuyerModel {
         await buyer.save();
     
         // Start a timer to remove the shoe from the cart if not purchased within 30 seconds
-        setTimeout(async () => {
+        await setTimeout(async () => {
             const buyerRefreshed = await this.model.findOne({buyerId: buyerId});
             const shoeRefreshed = await this.shoes.getShoe(shoeId);
     
