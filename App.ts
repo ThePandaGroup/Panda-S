@@ -56,7 +56,7 @@ class App {
       next();
     });
 
-    this.expressApp.use(session({ secret: 'keyboard cat' }));
+    this.expressApp.use(session({ secret: 'panda-s genius', resave: true, saveUninitialized: false}));
     this.expressApp.use(cookieParser());
     this.expressApp.use(passport.initialize());
     this.expressApp.use(passport.session());

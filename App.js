@@ -46,7 +46,7 @@ class App {
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             next();
         });
-        this.expressApp.use(session({ secret: 'keyboard cat' }));
+        this.expressApp.use(session({ secret: 'panda-s genius', resave: true, saveUninitialized: false }));
         this.expressApp.use(cookieParser());
         this.expressApp.use(passport.initialize());
         this.expressApp.use(passport.session());
