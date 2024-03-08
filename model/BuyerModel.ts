@@ -111,6 +111,7 @@ class BuyerModel {
         await shoe.save();
         await buyer.save();
 
+        try {
         setTimeout(async() => {
             try{
                 const buyerRefreshed = await this.model.findOne({buyerId: buyerId});
@@ -131,6 +132,9 @@ class BuyerModel {
                 console.error('Error removing item from cart during timeout: ', e)
             }
         }, 45000);
+    } catch (e) {
+        console.error('Error starting the timeOut for cart')
+    }
 
         
     
