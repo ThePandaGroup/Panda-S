@@ -110,9 +110,10 @@ class BuyerModel {
     
         await shoe.save();
         await buyer.save();
-    
-        // Start a timer to remove the shoe from the cart if not purchased within 30 seconds
-        await setTimeout(async () => {
+
+        const cartTimeOut= async() => {
+            await new Promise(resolve => setTimeout(resolve, 45000));
+
             const buyerRefreshed = await this.model.findOne({buyerId: buyerId});
             const shoeRefreshed = await this.shoes.getShoe(shoeId);
     
@@ -124,7 +125,25 @@ class BuyerModel {
                 await buyerRefreshed.save();
                 await shoeRefreshed.save();
             }
-        }, 45000);
+        cartTimeOut();
+        }
+
+        
+    
+        // Start a timer to remove the shoe from the cart if not purchased within 30 seconds
+        /* await setTimeout(async () => {
+            const buyerRefreshed = await this.model.findOne({buyerId: buyerId});
+            const shoeRefreshed = await this.shoes.getShoe(shoeId);
+    
+            const index = buyerRefreshed.cart.findIndex(item => item.shoeID === shoeId);
+            if (index > -1) {
+                buyerRefreshed.cart.splice(index, 1);
+                shoeRefreshed.shoeQuantity += 1;
+    
+                await buyerRefreshed.save();
+                await shoeRefreshed.save();
+            }
+        }, 45000); */
     
         // response.send('Shoe added to cart');
         response.json({ message: shoe.shoeName + ' added to ' + buyer.buyerName + '\'s cart' }); 

@@ -106,8 +106,8 @@ class BuyerModel {
             buyer.cart.push({ shoeID: shoeId, addedAt: new Date() });
             yield shoe.save();
             yield buyer.save();
-            // Start a timer to remove the shoe from the cart if not purchased within 30 seconds
-            setTimeout(() => __awaiter(this, void 0, void 0, function* () {
+            const cartTimeOut = () => __awaiter(this, void 0, void 0, function* () {
+                yield new Promise(resolve => setTimeout(resolve, 45000));
                 const buyerRefreshed = yield this.model.findOne({ buyerId: buyerId });
                 const shoeRefreshed = yield this.shoes.getShoe(shoeId);
                 const index = buyerRefreshed.cart.findIndex(item => item.shoeID === shoeId);
@@ -117,7 +117,22 @@ class BuyerModel {
                     yield buyerRefreshed.save();
                     yield shoeRefreshed.save();
                 }
-            }), 45000);
+                cartTimeOut();
+            });
+            // Start a timer to remove the shoe from the cart if not purchased within 30 seconds
+            /* await setTimeout(async () => {
+                const buyerRefreshed = await this.model.findOne({buyerId: buyerId});
+                const shoeRefreshed = await this.shoes.getShoe(shoeId);
+        
+                const index = buyerRefreshed.cart.findIndex(item => item.shoeID === shoeId);
+                if (index > -1) {
+                    buyerRefreshed.cart.splice(index, 1);
+                    shoeRefreshed.shoeQuantity += 1;
+        
+                    await buyerRefreshed.save();
+                    await shoeRefreshed.save();
+                }
+            }, 45000); */
             // response.send('Shoe added to cart');
             response.json({ message: shoe.shoeName + ' added to ' + buyer.buyerName + '\'s cart' });
         });
