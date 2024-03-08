@@ -111,22 +111,26 @@ class BuyerModel {
         await shoe.save();
         await buyer.save();
 
-        const cartTimeOut= async() => {
-            await new Promise(resolve => setTimeout(resolve, 45000));
+        setTimeout(async() => {
+            try{
+                const buyerRefreshed = await this.model.findOne({buyerId: buyerId});
+                const shoeRefreshed = await this.shoes.getShoe(shoeId);
 
-            const buyerRefreshed = await this.model.findOne({buyerId: buyerId});
-            const shoeRefreshed = await this.shoes.getShoe(shoeId);
-    
-            const index = buyerRefreshed.cart.findIndex(item => item.shoeID === shoeId);
-            if (index > -1) {
-                buyerRefreshed.cart.splice(index, 1);
-                shoeRefreshed.shoeQuantity += 1;
-    
-                await buyerRefreshed.save();
-                await shoeRefreshed.save();
+                if (!buyerRefreshed || !shoeRefreshed) {
+                    return response.status(404).send('Buyer or Shoe not found during timeout');
+                }
+                const index = buyerRefreshed.cart.findIndex(item => item.shoeID === shoeId);
+                if (index > -1) {
+                    buyerRefreshed.cart.splice(index, 1);
+                    shoeRefreshed.shoeQuantity += 1;
+        
+                    await buyerRefreshed.save();
+                    await shoeRefreshed.save();
+                }
+            } catch (e) {
+                console.error('Error removing item from cart during timeout: ', e)
             }
-        cartTimeOut();
-        }
+        }, 45000);
 
         
     

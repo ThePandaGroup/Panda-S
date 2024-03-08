@@ -106,19 +106,25 @@ class BuyerModel {
             buyer.cart.push({ shoeID: shoeId, addedAt: new Date() });
             yield shoe.save();
             yield buyer.save();
-            const cartTimeOut = () => __awaiter(this, void 0, void 0, function* () {
-                yield new Promise(resolve => setTimeout(resolve, 45000));
-                const buyerRefreshed = yield this.model.findOne({ buyerId: buyerId });
-                const shoeRefreshed = yield this.shoes.getShoe(shoeId);
-                const index = buyerRefreshed.cart.findIndex(item => item.shoeID === shoeId);
-                if (index > -1) {
-                    buyerRefreshed.cart.splice(index, 1);
-                    shoeRefreshed.shoeQuantity += 1;
-                    yield buyerRefreshed.save();
-                    yield shoeRefreshed.save();
+            setTimeout(() => __awaiter(this, void 0, void 0, function* () {
+                try {
+                    const buyerRefreshed = yield this.model.findOne({ buyerId: buyerId });
+                    const shoeRefreshed = yield this.shoes.getShoe(shoeId);
+                    if (!buyerRefreshed || !shoeRefreshed) {
+                        return response.status(404).send('Buyer or Shoe not found during timeout');
+                    }
+                    const index = buyerRefreshed.cart.findIndex(item => item.shoeID === shoeId);
+                    if (index > -1) {
+                        buyerRefreshed.cart.splice(index, 1);
+                        shoeRefreshed.shoeQuantity += 1;
+                        yield buyerRefreshed.save();
+                        yield shoeRefreshed.save();
+                    }
                 }
-                cartTimeOut();
-            });
+                catch (e) {
+                    console.error('Error removing item from cart during timeout: ', e);
+                }
+            }), 45000);
             // Start a timer to remove the shoe from the cart if not purchased within 30 seconds
             /* await setTimeout(async () => {
                 const buyerRefreshed = await this.model.findOne({buyerId: buyerId});
