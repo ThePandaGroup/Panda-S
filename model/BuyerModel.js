@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BuyerModel = void 0;
 const Mongoose = require("mongoose");
+const console_1 = require("console");
 class BuyerModel {
     constructor(DB_CONNECTION_STRING, shoes) {
         this.dbConnectionString = DB_CONNECTION_STRING;
@@ -106,12 +107,24 @@ class BuyerModel {
             buyer.cart.push({ shoeID: shoeId, addedAt: new Date() });
             yield shoe.save();
             yield buyer.save();
+            response.json({ message: shoe.shoeName + ' added to ' + buyer.buyerName + '\'s cart' });
+            try {
+                this.scheduleRemovalFromCart(buyerId, shoeId);
+            }
+            catch (error) {
+                (0, console_1.log)(error);
+            }
+        });
+    }
+    scheduleRemovalFromCart(buyerId, shoeId) {
+        return __awaiter(this, void 0, void 0, function* () {
             setTimeout(() => __awaiter(this, void 0, void 0, function* () {
                 try {
                     const buyerRefreshed = yield this.model.findOne({ buyerId: buyerId });
                     const shoeRefreshed = yield this.shoes.getShoe(shoeId);
                     if (!buyerRefreshed || !shoeRefreshed) {
-                        return response.status(404).send('Buyer or Shoe not found during timeout');
+                        console.error('Buyer or Shoe not found during timeout');
+                        return;
                     }
                     const index = buyerRefreshed.cart.findIndex(item => item.shoeID === shoeId);
                     if (index > -1) {
@@ -121,26 +134,10 @@ class BuyerModel {
                         yield shoeRefreshed.save();
                     }
                 }
-                catch (e) {
-                    console.error('Error removing item from cart during timeout: ', e);
+                catch (error) {
+                    console.error('Error removing item from cart during timeout: ', error);
                 }
             }), 45000);
-            // Start a timer to remove the shoe from the cart if not purchased within 30 seconds
-            /* await setTimeout(async () => {
-                const buyerRefreshed = await this.model.findOne({buyerId: buyerId});
-                const shoeRefreshed = await this.shoes.getShoe(shoeId);
-        
-                const index = buyerRefreshed.cart.findIndex(item => item.shoeID === shoeId);
-                if (index > -1) {
-                    buyerRefreshed.cart.splice(index, 1);
-                    shoeRefreshed.shoeQuantity += 1;
-        
-                    await buyerRefreshed.save();
-                    await shoeRefreshed.save();
-                }
-            }, 45000); */
-            // response.send('Shoe added to cart');
-            response.json({ message: shoe.shoeName + ' added to ' + buyer.buyerName + '\'s cart' });
         });
     }
 }

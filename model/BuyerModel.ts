@@ -111,14 +111,25 @@ class BuyerModel {
         await shoe.save();
         await buyer.save();
 
-        try {
+        response.json({ message: shoe.shoeName + ' added to ' + buyer.buyerName + '\'s cart' }); 
+        
+
+        try{
+        this.scheduleRemovalFromCart(buyerId, shoeId);
+        } catch(error) {
+            log(error);
+        }
+    }
+
+    private async scheduleRemovalFromCart(buyerId:number, shoeId:string){
         setTimeout(async() => {
             try{
                 const buyerRefreshed = await this.model.findOne({buyerId: buyerId});
                 const shoeRefreshed = await this.shoes.getShoe(shoeId);
 
                 if (!buyerRefreshed || !shoeRefreshed) {
-                    return response.status(404).send('Buyer or Shoe not found during timeout');
+                    console.error('Buyer or Shoe not found during timeout');
+                    return;
                 }
                 const index = buyerRefreshed.cart.findIndex(item => item.shoeID === shoeId);
                 if (index > -1) {
@@ -128,14 +139,13 @@ class BuyerModel {
                     await buyerRefreshed.save();
                     await shoeRefreshed.save();
                 }
-            } catch (e) {
-                console.error('Error removing item from cart during timeout: ', e)
+            } catch (error) {
+                console.error('Error removing item from cart during timeout: ', error);
             }
         }, 45000);
-    } catch (e) {
-        console.error('Error starting the timeOut for cart')
+    
     }
-
+}
         
     
         // Start a timer to remove the shoe from the cart if not purchased within 30 seconds
@@ -154,11 +164,5 @@ class BuyerModel {
         }, 45000); */
     
         // response.send('Shoe added to cart');
-        response.json({ message: shoe.shoeName + ' added to ' + buyer.buyerName + '\'s cart' }); 
-       }
-
-
-
-}
 
 export {BuyerModel};
