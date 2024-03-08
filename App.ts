@@ -105,7 +105,7 @@ class App {
 
   router.get('/api/user', async (req: RequestWithUser, res) => {
     if (req.user) {
-      const buyerId = req.user.buyerId; // Get the Google ID from the user's profile
+      const buyerId = req.user.buyerId; 
       res.send(buyerId);
     } else {
       res.send(null);
