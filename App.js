@@ -21,6 +21,9 @@ const passport = require("passport");
 const GooglePassport_1 = require("./GooglePassport");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+// interface RequestWithUser extends Request {
+//   user: any; // Or use a more specific type if you know the structure of your user object
+// }
 // Creates and configures an ExpressJS web server.
 class App {
     //Run configuration methods on the Express instance.
@@ -73,15 +76,14 @@ class App {
             console.log("redirecting to /#/list");
             res.redirect('/#/');
         });
-        router.get('/api/user', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            if (req.user) {
-                const buyerId = req.user.buyerId; // Get the Google ID from the user's profile
-                res.send(buyerId);
-            }
-            else {
-                res.send(null);
-            }
-        }));
+        // router.get('/api/user', async (req: RequestWithUser, res) => {
+        //   if (req.user) {
+        //     const buyerId = req.user.buyerId; 
+        //     res.send(buyerId);
+        //   } else {
+        //     res.send(null);
+        //   }
+        // });
         // SHOES ROUTES
         // Query All Shoes
         router.get('/app/shoes', (req, res) => __awaiter(this, void 0, void 0, function* () {

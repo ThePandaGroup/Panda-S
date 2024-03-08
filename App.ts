@@ -13,9 +13,9 @@ import * as cookieParser from 'cookie-parser';
 
 import { Request } from 'express';
 
-interface RequestWithUser extends Request {
-  user: any; // Or use a more specific type if you know the structure of your user object
-}
+// interface RequestWithUser extends Request {
+//   user: any; // Or use a more specific type if you know the structure of your user object
+// }
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -103,14 +103,14 @@ class App {
   );
 
 
-  router.get('/api/user', async (req: RequestWithUser, res) => {
-    if (req.user) {
-      const buyerId = req.user.buyerId; 
-      res.send(buyerId);
-    } else {
-      res.send(null);
-    }
-  });
+  // router.get('/api/user', async (req: RequestWithUser, res) => {
+  //   if (req.user) {
+  //     const buyerId = req.user.buyerId; 
+  //     res.send(buyerId);
+  //   } else {
+  //     res.send(null);
+  //   }
+  // });
 
     // SHOES ROUTES
 
