@@ -58,6 +58,12 @@ class App {
         console.log("user is not authenticated");
         res.redirect('/');
     }
+    isLoggedIn(req, res, next) {
+        if (req.isAuthenticated()) {
+            return next();
+        }
+        res.redirect('/login');
+    }
     // Configure API endpoints.
     routes() {
         let router = express.Router();
@@ -67,6 +73,15 @@ class App {
             console.log("redirecting to /#/list");
             res.redirect('/#/');
         });
+        router.get('/api/user', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            if (req.user) {
+                const buyerId = req.user.buyerId; // Get the Google ID from the user's profile
+                res.send(buyerId);
+            }
+            else {
+                res.send(null);
+            }
+        }));
         // SHOES ROUTES
         // Query All Shoes
         router.get('/app/shoes', (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -103,7 +118,7 @@ class App {
             yield this.Buyers.retrieveBuyerInfo(res, id);
         }));
         // Query A Buyer's Cart
-        router.get('/app/buyers/:buyerId/cart', (req, res) => __awaiter(this, void 0, void 0, function* () {
+        router.get('/app/buyers/:buyerId/cart', this.isLoggedIn, (req, res) => __awaiter(this, void 0, void 0, function* () {
             const id = Number(req.params.buyerId);
             console.log("Query Buyer's Cart with id: " + id);
             yield this.Buyers.retrieveBuyersCart(res, id);
