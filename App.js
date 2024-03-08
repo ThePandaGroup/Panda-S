@@ -225,7 +225,7 @@ class App {
         this.expressApp.use('/app/json/', express.static(__dirname + '/app/json'));
         this.expressApp.use('/assets', express.static(__dirname + '/pages'));
         //this.expressApp.use('/', express.static(__dirname+'/pages'));
-        this.expressApp.use('/', express.static(__dirname + '/dist/panda-s/browser'));
+        this.expressApp.use('/', express.static(__dirname + '/dist/browser'));
     }
 }
 exports.App = App;
