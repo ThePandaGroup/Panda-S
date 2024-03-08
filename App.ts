@@ -21,13 +21,13 @@ class App {
   public Shoes:ShoeModel;
   public Store:StorefrontModel;
 
-  public googlePassportObj:GooglePassportObj;
+  // public googlePassportObj:GooglePassportObj;
 
   //Run configuration methods on the Express instance.
   constructor(mongoDBConnection:string)
   {
 
-    this.googlePassportObj = new GooglePassportObj();
+    // this.googlePassportObj = new GooglePassportObj();
 
     this.expressApp = express();
     this.middleware();
@@ -50,10 +50,10 @@ class App {
       next();
     });
 
-    this.expressApp.use(session({ secret: 'keyboard cat' }));
-    this.expressApp.use(cookieParser());
-    this.expressApp.use(passport.initialize());
-    this.expressApp.use(passport.session());
+    // this.expressApp.use(session({ secret: 'keyboard cat' }));
+    // this.expressApp.use(cookieParser());
+    // this.expressApp.use(passport.initialize());
+    // this.expressApp.use(passport.session());
   }
 
   // Google Auth
@@ -74,20 +74,20 @@ class App {
     let router = express.Router();
 
 
-    router.get('/auth/google', 
-    passport.authenticate('google', {scope: ['profile']}));
+  //   router.get('/auth/google', 
+  //   passport.authenticate('google', {scope: ['profile']}));
 
 
-    router.get('/auth/google/callback', 
-    passport.authenticate('google', 
-      { failureRedirect: '/' }
-    ),
-    (req, res) => {
-      console.log("successfully authenticated user and returned to callback page.");
-      console.log("redirecting to /#/list");
-      res.redirect('/#/');
-    }
-  );
+  //   router.get('/auth/google/callback', 
+  //   passport.authenticate('google', 
+  //     { failureRedirect: '/' }
+  //   ),
+  //   (req, res) => {
+  //     console.log("successfully authenticated user and returned to callback page.");
+  //     console.log("redirecting to /#/list");
+  //     res.redirect('/#/');
+  //   }
+  // );
 
     // SHOES ROUTES
 
