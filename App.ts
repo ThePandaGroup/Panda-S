@@ -72,6 +72,13 @@ class App {
     res.redirect('/');
   }
 
+  private isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+  }
+
 
   
 
@@ -99,8 +106,7 @@ class App {
   router.get('/api/user', async (req: RequestWithUser, res) => {
     if (req.user) {
       const buyerId = req.user.buyerId; // Get the Google ID from the user's profile
-      const buyer = await this.Buyers.retrieveBuyerInfo(res,buyerId); // Get the buyer's information from your database
-      res.send(buyer);
+      res.send(buyerId);
     } else {
       res.send(null);
     }
@@ -151,14 +157,14 @@ class App {
     });
 
     // Query A Buyer's Cart
-    router.get('/app/buyers/:buyerId/cart', this.validateAuth, async (req, res) => {
+    router.get('/app/buyers/:buyerId/cart', this.isLoggedIn,async (req, res) => {
       const id = Number(req.params.buyerId);
       console.log("Query Buyer's Cart with id: " + id);
       await this.Buyers.retrieveBuyersCart(res, id);
     });
 
     // Add to Buyer's Cart
-    router.post('/app/buyers/:buyerId/cart/:shoeId', this.validateAuth, async (req, res) => {
+    router.post('/app/buyers/:buyerId/cart/:shoeId', async (req, res) => {
       let shoeId = req.params.shoeId;
       const buyerId = Number(req.params.buyerId);
       try {
