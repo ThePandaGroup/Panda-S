@@ -93,12 +93,13 @@ class App {
 
     router.get('/auth/google/callback', 
     passport.authenticate('google', 
-      { failureRedirect: '/' }
+      { failureRedirect: '/#/storefront/80299' }
     ),
     (req, res) => {
       console.log("successfully authenticated user and returned to callback page.");
-      console.log("redirecting to /s");
-      res.redirect('/#/storefront/80299');
+      console.log("redirecting to /#/");
+      //res.json({req.profile});
+      res.redirect('/#/');
     }
   );
 

@@ -68,10 +68,11 @@ class App {
     routes() {
         let router = express.Router();
         router.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'profile'] }));
-        router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
+        router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/#/storefront/80299' }), (req, res) => {
             console.log("successfully authenticated user and returned to callback page.");
-            console.log("redirecting to /s");
-            res.redirect('/#/storefront/80299');
+            console.log("redirecting to /#/");
+            //res.json({req.profile});
+            res.redirect('/#/');
         });
         // router.get('/app/buyers', async (req: RequestWithUser, res) => {
         //   if (req.user) {

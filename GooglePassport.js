@@ -19,7 +19,7 @@ class GooglePassport {
                 console.log("userId:" + profile.id);
                 console.log("displayName: " + profile.displayName);
                 console.log("retrieve all of the profile info needed");
-                // this.email = profile.emails[0].value;
+                //const username = profile.displayName;
                 return done(null, profile);
             });
         }));
