@@ -29,6 +29,11 @@ let ShoepageComponent = class ShoepageComponent {
             window.location.reload();
         });
     }
+    removeFromCart(shoeId) {
+        this.pandaProxyService.updateCartRemoval(1111, shoeId).subscribe(() => {
+            window.location.reload();
+        });
+    }
 };
 ShoepageComponent = __decorate([
     Component({

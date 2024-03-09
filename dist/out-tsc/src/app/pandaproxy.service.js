@@ -24,6 +24,9 @@ let PandaproxyService = class PandaproxyService {
     updateCart(buyerId, shoeId) {
         return this.httpClient.post(this.hostUrl + 'app/buyers/' + buyerId + '/cart/' + shoeId, {});
     }
+    updateCartRemoval(buyerId, shoeId) {
+        return this.httpClient.delete(this.hostUrl + 'app/buyers/' + buyerId + '/cart/' + shoeId, {});
+    }
     getLoggedInUser() {
         return this.httpClient.get('/api/user');
     }

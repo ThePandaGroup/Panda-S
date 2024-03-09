@@ -9,23 +9,24 @@ let AppComponent = class AppComponent {
         this.isLoggedIn = false;
         this.cart = [];
     }
+    /*  ngOnInit() {
+       this.pandaProxyService.getABuyer(1111).subscribe(buyer => {
+         this.buyer = buyer;
+         this.fetchCartItems((buyer as any).cart);
+       });
+     } */
     ngOnInit() {
-        this.pandaProxyService.getABuyer(1111).subscribe(buyer => {
-            this.buyer = buyer;
-            this.fetchCartItems(buyer.cart);
+        this.pandaProxyService.getLoggedInUser().subscribe(user => {
+            if (user) {
+                this.isLoggedIn = true;
+                this.buyer = user;
+                this.fetchCartItems(user.cart);
+            }
+            else {
+                this.isLoggedIn = false;
+            }
         });
     }
-    // ngOnInit() {
-    //   this.pandaProxyService.getLoggedInUser().subscribe(user => {
-    //     if (user) {
-    //       this.isLoggedIn = true;
-    //       this.buyer = user;
-    //       this.fetchCartItems((user as any).cart);
-    //     } else {
-    //       this.isLoggedIn = false;
-    //     }
-    //   });
-    // }
     fetchCartItems(cart) {
         cart.forEach((cartItem) => {
             this.pandaProxyService.getAShoe(Number(cartItem.shoeID)).subscribe(shoe => {
