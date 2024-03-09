@@ -120,6 +120,7 @@ class App {
       if (req.user) {
         const buyerId = req.user.id; 
         console.log("sending");
+        console.log(buyerId);
         res.send(buyerId);
       } else {
         console.log("not sending");
