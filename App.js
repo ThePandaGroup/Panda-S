@@ -95,9 +95,9 @@ class App {
             req.session.destroy(err => {
                 if (err) {
                     console.log('Error : Failed to destroy the session during logout.', err);
+                    return res.status(500).json({ error: 'Logout failed' });
                 }
                 res.status(200).json({ message: 'Successfully logged out' });
-                res.redirect('/#/');
             });
         });
         // SHOES ROUTES
