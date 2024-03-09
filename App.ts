@@ -18,6 +18,7 @@ interface RequestWithUser extends Request {
     id: string;
     // Add other properties as needed
   };
+  session?: session & { buyerId?: string };
 }
 
 // Creates and configures an ExpressJS web server.
@@ -105,7 +106,7 @@ class App {
       console.log(buyerId);
 
       // res.json(req.user.id);
-
+      req.session.buyerId = userProfile.id;
 
       console.log("redirecting to /#/");
       //res.json({req.profile});
