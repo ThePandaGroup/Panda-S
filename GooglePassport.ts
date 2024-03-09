@@ -35,6 +35,7 @@ class GooglePassport {
 
                     await buyerModel.createModel();
 
+                    buyerModel.createModel();
 
                     buyerModel.model.findOne({ buyerId: profile.id }, (err, buyer) => {
                         if (err) {
