@@ -16,6 +16,7 @@ interface IBuyer extends Mongoose.Document {
     shippingAddr: string;
     orderHistory: string[];
     cart: CartItem[];
+    googleId: string;
 }
 
 export {IBuyer};

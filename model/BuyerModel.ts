@@ -33,8 +33,11 @@ class BuyerModel {
                 shippingAddr: String,
                 orderHistory: [String],
                 cart: [{shoeID: String, addedAt: Date}],
+                googleId: String,
             }, {collection: 'buyers'}
-        );    
+        );
+        
+        this.schema.plugin(findOrCreate);
     }
 
     public async createModel() {

@@ -83,11 +83,18 @@ class App {
   // }
 
 
+
+
   
 
   // Configure API endpoints.
   private routes(): void {
     let router = express.Router();
+
+    router.get('/user', (req: RequestWithUser, res) => {
+      res.send(req.user);
+    });
+
 
 
     router.get('/auth/google', 

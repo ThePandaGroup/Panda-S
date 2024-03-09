@@ -22,34 +22,28 @@ class GooglePassport {
             },
             (accessToken, refreshToken, profile, done) => {
                 console.log("inside new password google strategy");
+
+                BuyerModel.findOneAndUpdate(
+                    { googleId: profile.id }, // Find a document with this Google ID.
+                    {
+                        buyerName: profile.displayName,
+                        buyerEmail: profile.emails[0].value,
+                        googleId: profile.id,
+                        // Set other fields as needed.
+                    },
+                    { upsert: true, new: true, setDefaultsOnInsert: true }, // Options for creating if not found.
+                    (err, buyer) => {
+                        return done(err, buyer);
+                    }
+                );
+
+
                 process.nextTick(async () => {
                     console.log('validating google profile:' + JSON.stringify(profile));
                     console.log("userId:" + profile.id);
                     console.log("displayName: " + profile.displayName);
                     console.log("retrieve all of the profile info needed");
                     //const username = profile.displayName;
-
-                    const DB_CONNECTION_STRING = process.env.DB_PROTOCOL + process.env.DB_USER + ':' + encodeURIComponent(process.env.DB_PASSWORD) + process.env.DB_INFO;
-
-                    const buyerModel = new BuyerModel(DB_CONNECTION_STRING, null);
-
-                    await buyerModel.createModel();
-
-                    buyerModel.createModel();
-
-                    buyerModel.model.findOne({ buyerId: profile.id }, (err, buyer) => {
-                        if (err) {
-                            return done(err);
-                        }
-                        if (!buyer) {
-                            // If the buyer isn't found in your database, handle it as you see fit.
-                            // You could create a new buyer, or return an error
-                            return done(null, false, { message: 'Buyer not found' });
-                        }
-                        // If the buyer is found, return it
-                        return done(null, buyer);
-                    });
-
 
                     return done(null, profile);
                 }); 
@@ -60,8 +54,17 @@ class GooglePassport {
             done(null, user);
         });
 
-        passport.deserializeUser(function(user, done) {
-            done(null, user);
+        // passport.deserializeUser(function(user, done) {
+        //     done(null, user);
+        // });
+
+        passport.deserializeUser(async (id, done) => {
+            try {
+                const user = await BuyerModel.findById(id);
+                done(null, user);
+            } catch (err) {
+                done(err, null);
+            }
         });
 
 
