@@ -32,7 +32,7 @@ class SellerModel {
         }
     }
 
-    public async retrieveSellerInfo(response:any, value:number) {
+    public async retrieveSellerInfo(response:any, value:any) {
         var query = this.model.findOne({"sellerId": value});
         try {
             const result = await query.exec();

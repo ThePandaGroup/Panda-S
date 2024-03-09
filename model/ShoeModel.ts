@@ -48,7 +48,7 @@ class ShoeModel {
     }
   }
 
-  public async retrieveShoe(response:any, value:number) {
+  public async retrieveShoe(response:any, value:any) {
     var query = this.model.findOne({"shoeId": value});
     try {
       const result = await query.exec();

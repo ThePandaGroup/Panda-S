@@ -47,7 +47,7 @@ class StorefrontModel {
     }
   }
 
-  public async retrieveStorefront(response:any, value:number) {
+  public async retrieveStorefront(response:any, value:any) {
     var query = this.model.findOne({"storeId":value});
     try {
       const result = await query.exec();
@@ -74,7 +74,7 @@ class StorefrontModel {
     }
 }
 
-  public async retrieveStorefrontsInv(response:any, value:number) {
+  public async retrieveStorefrontsInv(response:any, value:any) {
     var query = this.model.findOne({"storeId": value});
     try {
         let storeInfo = await query.exec();
