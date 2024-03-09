@@ -58,12 +58,6 @@ class App {
         console.log("user is not authenticated");
         res.redirect('/');
     }
-    // private isLoggedIn(req, res, next) {
-    //   if (req.isAuthenticated()) {
-    //       return next();
-    //   }
-    //   res.redirect('/login');
-    // }
     // Configure API endpoints.
     routes() {
         let router = express.Router();
@@ -95,6 +89,18 @@ class App {
                 res.send(null);
             }
         }));
+        // router.get('/app/user', (req: RequestWithUser, res) => {
+        //   // Check if the user is authenticated
+        //   if (req.user) {
+        //     const userInfo = {
+        //       id: req.user.id,
+        //       // Include other user properties as needed
+        //     };
+        //     res.json(userInfo);
+        //   } else {
+        //     res.status(401).send('User not authenticated');
+        //   }
+        // });
         // SHOES ROUTES
         // Query All Shoes
         router.get('/app/shoes', (req, res) => __awaiter(this, void 0, void 0, function* () {

@@ -14,7 +14,7 @@ import * as cookieParser from 'cookie-parser';
 import { Request } from 'express';
 
 interface RequestWithUser extends Request {
-  user: { // Define the shape of the user object as needed
+  user?: { // Define the shape of the user object as needed
     id: string;
     // Add other properties as needed
   };
@@ -75,18 +75,6 @@ class App {
     res.redirect('/');
   }
 
-  // private isLoggedIn(req, res, next) {
-  //   if (req.isAuthenticated()) {
-  //       return next();
-  //   }
-  //   res.redirect('/login');
-  // }
-
-
-
-
-  
-
   // Configure API endpoints.
   private routes(): void {
     let router = express.Router();
@@ -136,6 +124,25 @@ class App {
       res.send(null);
     }
   });
+
+
+  // router.get('/app/user', (req: RequestWithUser, res) => {
+  //   // Check if the user is authenticated
+  //   if (req.user) {
+  //     const userInfo = {
+  //       id: req.user.id,
+  //       // Include other user properties as needed
+  //     };
+  //     res.json(userInfo);
+  
+  //   } else {
+  //     res.status(401).send('User not authenticated');
+  //   }
+  // });
+
+
+
+
 
     // SHOES ROUTES
 
