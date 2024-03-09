@@ -92,7 +92,7 @@ class BuyerModel {
         }
     }
 
-    public async addToCart(response:any, buyerId: number, shoeId: string){
+    public async addToCart(response:any, buyerId: string, shoeId: string){
         // Find the buyer and the shoe
         const buyer = await this.model.findOne({buyerId: buyerId});
         const shoe = await this.shoes.getShoe(shoeId);
@@ -120,7 +120,7 @@ class BuyerModel {
         }
     }
 
-    private async scheduleRemovalFromCart(buyerId:number, shoeId:string){
+    private async scheduleRemovalFromCart(buyerId:string, shoeId:string){
         setTimeout(async() => {
             try{
                 const buyerRefreshed = await this.model.findOne({buyerId: buyerId});

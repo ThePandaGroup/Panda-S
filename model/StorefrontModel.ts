@@ -58,7 +58,7 @@ class StorefrontModel {
     }
   }
 
-  public async retrieveInvCount(response:any, storeId:number) {
+  public async retrieveInvCount(response:any, storeId:string) {
     console.log("retrieving History Sales Count ...");
     const store = await this.model.findOne({storeId: storeId});
     try {
@@ -85,7 +85,7 @@ class StorefrontModel {
     }
   }
 
-  public async addShoeToInv(response:any, sellerId: number, shoeId: string) {
+  public async addShoeToInv(response:any, sellerId: string, shoeId: string) {
     console.log("Adding Shoe to Inventory ...");
     var query = this.model.updateOne({storeId: sellerId}, {$push:{invList: shoeId}});
     try {

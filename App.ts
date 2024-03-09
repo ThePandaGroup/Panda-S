@@ -208,7 +208,7 @@ class App {
       let shoeId = req.params.shoeId;
       const buyerId = req.user.id; // Use req.user.id instead of req.params.buyerId
       try {
-          await this.Buyers.addToCart(res, Number(buyerId), shoeId);
+          await this.Buyers.addToCart(res, buyerId, shoeId);
           console.log("Added to cart");
       } catch(err) {
           console.log(`Error in adding an Item to the cart ${err}`);
@@ -302,7 +302,7 @@ class App {
 
     // Query A Storefront's Inventory Count
     router.get('/app/storefronts/:storeId/inventory/count', async (req, res) => {
-      const id = Number(req.params.storeId);
+      const id = req.params.storeId;
       console.log("Query Storefront's Inventory count with id: " + id);
       await this.Store.retrieveInvCount(res, id);
     });
@@ -310,7 +310,7 @@ class App {
     // Add Shoe to Storefront's Inventory
     router.post('/app/storefronts/:storeId/inventory/add/', async (req, res) => {
       console.log("Adding a New Shoe");
-      let storeId = Number(req.params.storeId);
+      let storeId = req.params.storeId;
       const id = crypto.randomBytes(16).toString("hex");
       console.log(req.body);
       var jsonObj = req.body;

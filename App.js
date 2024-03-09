@@ -156,7 +156,7 @@ class App {
             let shoeId = req.params.shoeId;
             const buyerId = req.user.id; // Use req.user.id instead of req.params.buyerId
             try {
-                yield this.Buyers.addToCart(res, Number(buyerId), shoeId);
+                yield this.Buyers.addToCart(res, buyerId, shoeId);
                 console.log("Added to cart");
             }
             catch (err) {
@@ -239,14 +239,14 @@ class App {
         }));
         // Query A Storefront's Inventory Count
         router.get('/app/storefronts/:storeId/inventory/count', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const id = Number(req.params.storeId);
+            const id = req.params.storeId;
             console.log("Query Storefront's Inventory count with id: " + id);
             yield this.Store.retrieveInvCount(res, id);
         }));
         // Add Shoe to Storefront's Inventory
         router.post('/app/storefronts/:storeId/inventory/add/', (req, res) => __awaiter(this, void 0, void 0, function* () {
             console.log("Adding a New Shoe");
-            let storeId = Number(req.params.storeId);
+            let storeId = req.params.storeId;
             const id = crypto.randomBytes(16).toString("hex");
             console.log(req.body);
             var jsonObj = req.body;
