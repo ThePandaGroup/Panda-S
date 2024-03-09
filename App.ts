@@ -126,14 +126,14 @@ class App {
   );
 
 
-  // router.get('/app/buyers', async (req: RequestWithUser, res) => {
-  //   if (req.user) {
-  //     const buyerId = req.user.buyerId; 
-  //     res.send(buyerId);
-  //   } else {
-  //     res.send(null);
-  //   }
-  // });
+  router.get('app/user', async (req: RequestWithUser, res) => {
+    if (req.user) {
+      const buyerId = req.user.id; 
+      res.send(buyerId);
+    } else {
+      res.send(null);
+    }
+  });
 
     // SHOES ROUTES
 

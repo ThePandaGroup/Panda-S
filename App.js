@@ -84,14 +84,15 @@ class App {
             //res.json({req.profile});
             res.redirect('/#/');
         });
-        // router.get('/app/buyers', async (req: RequestWithUser, res) => {
-        //   if (req.user) {
-        //     const buyerId = req.user.buyerId; 
-        //     res.send(buyerId);
-        //   } else {
-        //     res.send(null);
-        //   }
-        // });
+        router.get('app/user', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            if (req.user) {
+                const buyerId = req.user.id;
+                res.send(buyerId);
+            }
+            else {
+                res.send(null);
+            }
+        }));
         // SHOES ROUTES
         // Query All Shoes
         router.get('/app/shoes', (req, res) => __awaiter(this, void 0, void 0, function* () {
