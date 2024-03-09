@@ -84,7 +84,7 @@ class App {
                 const buyerId = String(req.user.id);
                 console.log("sending buyer id to client:");
                 console.log(buyerId);
-                res.send(buyerId);
+                res.send({ buyerId: buyerId });
             }
             else {
                 console.log("not sending");
