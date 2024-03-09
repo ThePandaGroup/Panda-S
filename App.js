@@ -82,7 +82,8 @@ class App {
         router.get('/app/login', (req, res) => __awaiter(this, void 0, void 0, function* () {
             if (req.user) {
                 const buyerId = req.user.id;
-                console.log("sending");
+                console.log("sending buyer id to client:");
+                console.log(buyerId);
                 res.send(buyerId);
             }
             else {

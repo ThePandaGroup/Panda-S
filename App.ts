@@ -119,7 +119,7 @@ class App {
     router.get('/app/login', async (req: RequestWithUser, res) => {
       if (req.user) {
         const buyerId = req.user.id; 
-        console.log("sending");
+        console.log("sending buyer id to client:");
         console.log(buyerId);
         res.send(buyerId);
       } else {
