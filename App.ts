@@ -180,11 +180,22 @@ class App {
     });
 
     // Add to Buyer's Cart
-    router.post('/app/buyers/:buyerId/cart/:shoeId', async (req, res) => {
+    // router.post('/app/buyers/:buyerId/cart/:shoeId', async (req, res) => {
+    //   let shoeId = req.params.shoeId;
+    //   const buyerId = Number(req.params.buyerId);
+    //   try {
+    //       await this.Buyers.addToCart(res, buyerId, shoeId);
+    //       console.log("Added to cart");
+    //   } catch(err) {
+    //       console.log(`Error in adding an Item to the cart ${err}`);
+    //   };
+    // })
+
+    router.post('/app/buyers/cart/:shoeId', this.validateAuth, async (req: RequestWithUser, res) => {
       let shoeId = req.params.shoeId;
-      const buyerId = Number(req.params.buyerId);
+      const buyerId = req.user.id; // Use req.user.id instead of req.params.buyerId
       try {
-          await this.Buyers.addToCart(res, buyerId, shoeId);
+          await this.Buyers.addToCart(res, Number(buyerId), shoeId);
           console.log("Added to cart");
       } catch(err) {
           console.log(`Error in adding an Item to the cart ${err}`);
