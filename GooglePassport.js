@@ -23,6 +23,7 @@ class GooglePassport {
                 //const username = profile.displayName;
                 const DB_CONNECTION_STRING = process.env.DB_PROTOCOL + process.env.DB_USER + ':' + encodeURIComponent(process.env.DB_PASSWORD) + process.env.DB_INFO;
                 const buyerModel = new BuyerModel_1.BuyerModel(DB_CONNECTION_STRING);
+                buyerModel.createModel();
                 buyerModel.model.findOne({ buyerId: profile.id }, (err, buyer) => {
                     if (err) {
                         return done(err);

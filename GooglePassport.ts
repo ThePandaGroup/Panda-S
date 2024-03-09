@@ -33,6 +33,7 @@ class GooglePassport {
 
                     const buyerModel = new BuyerModel(DB_CONNECTION_STRING);
 
+                    buyerModel.createModel();
 
                     buyerModel.model.findOne({ buyerId: profile.id }, (err, buyer) => {
                         if (err) {
