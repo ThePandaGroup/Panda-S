@@ -132,11 +132,21 @@ class App {
             yield this.Buyers.retrieveBuyersCart(res, id);
         }));
         // Add to Buyer's Cart
-        router.post('/app/buyers/:buyerId/cart/:shoeId', (req, res) => __awaiter(this, void 0, void 0, function* () {
+        // router.post('/app/buyers/:buyerId/cart/:shoeId', async (req, res) => {
+        //   let shoeId = req.params.shoeId;
+        //   const buyerId = Number(req.params.buyerId);
+        //   try {
+        //       await this.Buyers.addToCart(res, buyerId, shoeId);
+        //       console.log("Added to cart");
+        //   } catch(err) {
+        //       console.log(`Error in adding an Item to the cart ${err}`);
+        //   };
+        // })
+        router.post('/app/buyers/cart/:shoeId', this.validateAuth, (req, res) => __awaiter(this, void 0, void 0, function* () {
             let shoeId = req.params.shoeId;
-            const buyerId = Number(req.params.buyerId);
+            const buyerId = req.user.id; // Use req.user.id instead of req.params.buyerId
             try {
-                yield this.Buyers.addToCart(res, buyerId, shoeId);
+                yield this.Buyers.addToCart(res, Number(buyerId), shoeId);
                 console.log("Added to cart");
             }
             catch (err) {
@@ -144,6 +154,19 @@ class App {
             }
             ;
         }));
+        // router.post('/app/buyers/:buyerId/cart/:shoeId', this.validateAuth, async (req: RequestWithUser, res) => {
+        //   let shoeId = req.params.shoeId;
+        //   const buyerId = Number(req.params.buyerId);
+        //   if (req.user.id !== String(buyerId)) {
+        //     return res.status(403).send('Unauthorized');
+        //   }
+        //   try {
+        //       await this.Buyers.addToCart(res, buyerId, shoeId);
+        //       console.log("Added to cart");
+        //   } catch(err) {
+        //       console.log(`Error in adding an Item to the cart ${err}`);
+        //   };
+        // })
         router.post('/app/buyers/', (req, res) => __awaiter(this, void 0, void 0, function* () {
             console.log("Adding a New Buyer");
             const id = crypto.randomBytes(16).toString("hex");

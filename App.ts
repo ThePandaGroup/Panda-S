@@ -202,6 +202,22 @@ class App {
       };
     })
 
+    // router.post('/app/buyers/:buyerId/cart/:shoeId', this.validateAuth, async (req: RequestWithUser, res) => {
+    //   let shoeId = req.params.shoeId;
+    //   const buyerId = Number(req.params.buyerId);
+      
+    //   if (req.user.id !== String(buyerId)) {
+    //     return res.status(403).send('Unauthorized');
+    //   }
+    
+    //   try {
+    //       await this.Buyers.addToCart(res, buyerId, shoeId);
+    //       console.log("Added to cart");
+    //   } catch(err) {
+    //       console.log(`Error in adding an Item to the cart ${err}`);
+    //   };
+    // })
+
     router.post('/app/buyers/', async (req, res) => {
       console.log("Adding a New Buyer");
       const id = crypto.randomBytes(16).toString("hex");
