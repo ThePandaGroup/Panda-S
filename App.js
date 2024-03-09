@@ -32,7 +32,7 @@ class App {
         this.Sellers = new SellerModel_1.SellerModel(mongoDBConnection);
         this.Shoes = new ShoeModel_1.ShoeModel(mongoDBConnection);
         this.Store = new StorefrontModel_1.StorefrontModel(mongoDBConnection);
-        this.Buyers = new BuyerModel_1.BuyerModel(mongoDBConnection);
+        this.Buyers = new BuyerModel_1.BuyerModel(mongoDBConnection, this.Shoes);
     }
     // Configure Express middleware.
     middleware() {
