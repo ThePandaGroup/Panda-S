@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const passport = require("passport");
-const BuyerModel_1 = require("./model/BuyerModel");
 //let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 let GoogleStrategy = require('passport-google-oauth20-with-people-api').Strategy;
 // Creates a Passport configuration for Google
@@ -33,18 +32,24 @@ class GooglePassport {
                 return done(null, profile);
             }));
         }));
-        const dbUser = process.env.DB_USER;
-        const dbPassword = process.env.DB_PASSWORD;
-        const dbProtocol = process.env.DB_PROTOCOL;
-        const DB_CONNECTION_STRING = dbProtocol + dbUser + ':' + encodeURIComponent(dbPassword) + process.env.DB_INFO;
-        const buyerModelInstance = new BuyerModel_1.BuyerModel(DB_CONNECTION_STRING, null);
+        // const dbUser = process.env.DB_USER;
+        // const dbPassword = process.env.DB_PASSWORD;
+        // const dbProtocol = process.env.DB_PROTOCOL;
+        // const DB_CONNECTION_STRING = dbProtocol + dbUser + ':' + encodeURIComponent(dbPassword) + process.env.DB_INFO;
+        // const buyerModelInstance = new BuyerModel(DB_CONNECTION_STRING, null);
+        // passport.serializeUser(function(user, done) {
+        //     done(null, user.id);
+        // });
+        // passport.deserializeUser(function(user, done) {
+        //     buyerModelInstance.model.findById(user.id, function(err, user) {
+        //         done(null, user);
+        //     });
+        // });
         passport.serializeUser(function (user, done) {
-            done(null, user.id);
+            done(null, user);
         });
         passport.deserializeUser(function (user, done) {
-            buyerModelInstance.model.findById(user.id, function (err, user) {
-                done(null, user);
-            });
+            done(null, user);
         });
     }
 }
