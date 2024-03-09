@@ -25,12 +25,12 @@ let ShoepageComponent = class ShoepageComponent {
         }
     }
     addToCart(shoeId) {
-        this.pandaProxyService.updateCart(1111, shoeId).subscribe(() => {
+        this.pandaProxyService.updateCart(buyerId, shoeId).subscribe(() => {
             window.location.reload();
         });
     }
     removeFromCart(shoeId) {
-        this.pandaProxyService.updateCartRemoval(1111, shoeId).subscribe(() => {
+        this.pandaProxyService.updateCartRemoval(buyerId, shoeId).subscribe(() => {
             window.location.reload();
         });
     }
