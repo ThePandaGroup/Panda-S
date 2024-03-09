@@ -110,14 +110,12 @@ class App {
 
       console.log("redirecting to /#/");
       //res.json({req.profile});
-      // res.redirect('/#/');
-
-      res.json({ buyerId: userProfile.id });
+      res.redirect('/#/');
     }
   );
 
 
-  router.get('app/user', async (req: RequestWithUser, res) => {
+  router.get('/app/user', async (req: RequestWithUser, res) => {
     if (req.user) {
       const buyerId = req.user.id; 
       console.log("SENDING SHIT LMAO XD");
@@ -127,23 +125,6 @@ class App {
       res.send(null);
     }
   });
-
-
-  // router.get('/app/user', (req: RequestWithUser, res) => {
-  //   // Check if the user is authenticated
-  //   if (req.user) {
-  //     const userInfo = {
-  //       id: req.user.id,
-  //       // Include other user properties as needed
-  //     };
-  //     res.json(userInfo);
-  
-  //   } else {
-  //     res.status(401).send('User not authenticated');
-  //   }
-  // });
-
-
 
 
 
