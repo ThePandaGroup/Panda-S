@@ -58,30 +58,29 @@ class App {
         console.log("user is not authenticated");
         res.redirect('/');
     }
-    isLoggedIn(req, res, next) {
-        if (req.isAuthenticated()) {
-            return next();
-        }
-        res.redirect('/login');
-    }
+    // private isLoggedIn(req, res, next) {
+    //   if (req.isAuthenticated()) {
+    //       return next();
+    //   }
+    //   res.redirect('/login');
+    // }
     // Configure API endpoints.
     routes() {
         let router = express.Router();
         router.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'profile'] }));
         router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
             console.log("successfully authenticated user and returned to callback page.");
-            console.log("redirecting to /#/list");
-            res.redirect('/#/');
+            console.log("redirecting to /s");
+            res.redirect('/#/storefront/80299');
         });
-        router.get('/app/buyers', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            if (req.user) {
-                const buyerId = req.user.buyerId;
-                res.send(buyerId);
-            }
-            else {
-                res.send(null);
-            }
-        }));
+        // router.get('/app/buyers', async (req: RequestWithUser, res) => {
+        //   if (req.user) {
+        //     const buyerId = req.user.buyerId; 
+        //     res.send(buyerId);
+        //   } else {
+        //     res.send(null);
+        //   }
+        // });
         // SHOES ROUTES
         // Query All Shoes
         router.get('/app/shoes', (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -118,13 +117,13 @@ class App {
             yield this.Buyers.retrieveBuyerInfo(res, id);
         }));
         // Query A Buyer's Cart
-        router.get('/app/buyers/:buyerId/cart', this.isLoggedIn, (req, res) => __awaiter(this, void 0, void 0, function* () {
+        router.get('/app/buyers/:buyerId/cart', this.validateAuth, (req, res) => __awaiter(this, void 0, void 0, function* () {
             const id = Number(req.params.buyerId);
             console.log("Query Buyer's Cart with id: " + id);
             yield this.Buyers.retrieveBuyersCart(res, id);
         }));
         // Add to Buyer's Cart
-        router.post('/app/buyers/:buyerId/cart/:shoeId', (req, res) => __awaiter(this, void 0, void 0, function* () {
+        router.post('/app/buyers/:buyerId/cart/:shoeId', this.validateAuth, (req, res) => __awaiter(this, void 0, void 0, function* () {
             let shoeId = req.params.shoeId;
             const buyerId = Number(req.params.buyerId);
             try {

@@ -72,12 +72,12 @@ class App {
     res.redirect('/');
   }
 
-  private isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/login');
-  }
+  // private isLoggedIn(req, res, next) {
+  //   if (req.isAuthenticated()) {
+  //       return next();
+  //   }
+  //   res.redirect('/login');
+  // }
 
 
   
@@ -97,20 +97,20 @@ class App {
     ),
     (req, res) => {
       console.log("successfully authenticated user and returned to callback page.");
-      console.log("redirecting to /#/list");
-      res.redirect('/#/');
+      console.log("redirecting to /s");
+      res.redirect('/#/storefront/80299');
     }
   );
 
 
-  router.get('/app/buyers', async (req: RequestWithUser, res) => {
-    if (req.user) {
-      const buyerId = req.user.buyerId; 
-      res.send(buyerId);
-    } else {
-      res.send(null);
-    }
-  });
+  // router.get('/app/buyers', async (req: RequestWithUser, res) => {
+  //   if (req.user) {
+  //     const buyerId = req.user.buyerId; 
+  //     res.send(buyerId);
+  //   } else {
+  //     res.send(null);
+  //   }
+  // });
 
     // SHOES ROUTES
 
@@ -157,14 +157,14 @@ class App {
     });
 
     // Query A Buyer's Cart
-    router.get('/app/buyers/:buyerId/cart', this.isLoggedIn,async (req, res) => {
+    router.get('/app/buyers/:buyerId/cart', this.validateAuth,async (req, res) => {
       const id = Number(req.params.buyerId);
       console.log("Query Buyer's Cart with id: " + id);
       await this.Buyers.retrieveBuyersCart(res, id);
     });
 
     // Add to Buyer's Cart
-    router.post('/app/buyers/:buyerId/cart/:shoeId', async (req, res) => {
+    router.post('/app/buyers/:buyerId/cart/:shoeId', this.validateAuth, async (req, res) => {
       let shoeId = req.params.shoeId;
       const buyerId = Number(req.params.buyerId);
       try {
