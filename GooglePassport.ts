@@ -22,7 +22,7 @@ class GooglePassport {
             },
             (accessToken, refreshToken, profile, done) => {
                 console.log("inside new password google strategy");
-                process.nextTick( () => {
+                process.nextTick(async () => {
                     console.log('validating google profile:' + JSON.stringify(profile));
                     console.log("userId:" + profile.id);
                     console.log("displayName: " + profile.displayName);
@@ -31,7 +31,9 @@ class GooglePassport {
 
                     const DB_CONNECTION_STRING = process.env.DB_PROTOCOL + process.env.DB_USER + ':' + encodeURIComponent(process.env.DB_PASSWORD) + process.env.DB_INFO;
 
-                    const buyerModel = new BuyerModel(DB_CONNECTION_STRING);
+                    const buyerModel = new BuyerModel(DB_CONNECTION_STRING, null);
+
+                    await buyerModel.createModel();
 
 
                     buyerModel.model.findOne({ buyerId: profile.id }, (err, buyer) => {

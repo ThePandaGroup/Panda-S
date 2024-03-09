@@ -12,14 +12,14 @@ class BuyerModel {
     public model:any;
     public dbConnectionString:string;
     public shoes: ShoeModel;
-
-    public constructor(DB_CONNECTION_STRING:string) {
+    // (DB_CONNECTION_STRING:string, shoes:ShoeModel)
+    public constructor(DB_CONNECTION_STRING:string, shoes:ShoeModel) {
         this.dbConnectionString = DB_CONNECTION_STRING;
         this.createSchema();
         this.createModel();
 
         this.addToCart = this.addToCart.bind(this);
-        // this.shoes = shoes;
+        this.shoes = shoes;
     }
 
     public createSchema() {
