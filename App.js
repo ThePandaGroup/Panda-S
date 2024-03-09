@@ -77,7 +77,8 @@ class App {
             req.session.buyerId = userProfile.id;
             console.log("redirecting to /#/");
             //res.json({req.profile});
-            res.redirect('/#/');
+            // res.redirect('/#/');
+            res.json({ buyerId: userProfile.id });
         });
         router.get('app/user', (req, res) => __awaiter(this, void 0, void 0, function* () {
             if (req.user) {

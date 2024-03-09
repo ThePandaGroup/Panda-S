@@ -110,7 +110,9 @@ class App {
 
       console.log("redirecting to /#/");
       //res.json({req.profile});
-      res.redirect('/#/');
+      // res.redirect('/#/');
+
+      res.json({ buyerId: userProfile.id });
     }
   );
 
