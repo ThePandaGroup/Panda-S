@@ -134,6 +134,7 @@ class App {
         if (err) {
           console.log('Error : Failed to destroy the session during logout.', err);
         }
+        res.status(200).json({ message: 'Successfully logged out' });
         res.redirect('/#/');
       });
     });
