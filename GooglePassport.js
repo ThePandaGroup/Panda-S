@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const passport = require("passport");
 //let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
@@ -23,14 +14,14 @@ class GooglePassport {
             callbackURL: "https://panda-s.azurewebsites.net/auth/google/callback"
         }, (accessToken, refreshToken, profile, done) => {
             console.log("inside new password google strategy");
-            process.nextTick(() => __awaiter(this, void 0, void 0, function* () {
+            process.nextTick(() => {
                 console.log('validating google profile:' + JSON.stringify(profile));
                 console.log("userId:" + profile.id);
                 console.log("displayName: " + profile.displayName);
                 console.log("retrieve all of the profile info needed");
                 //const username = profile.displayName;
                 return done(null, profile);
-            }));
+            });
         }));
         // const dbUser = process.env.DB_USER;
         // const dbPassword = process.env.DB_PASSWORD;

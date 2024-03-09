@@ -24,7 +24,7 @@ class GooglePassport {
                 console.log("inside new password google strategy");
 
 
-                process.nextTick(async () => {
+                process.nextTick(() => {
                     console.log('validating google profile:' + JSON.stringify(profile));
                     console.log("userId:" + profile.id);
                     console.log("displayName: " + profile.displayName);
