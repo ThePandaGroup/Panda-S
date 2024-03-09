@@ -74,6 +74,7 @@ class App {
             const buyerId = userProfile.id;
             console.log(buyerId);
             // res.json(req.user.id);
+            req.session.buyerId = userProfile.id;
             console.log("redirecting to /#/");
             //res.json({req.profile});
             res.redirect('/#/');
