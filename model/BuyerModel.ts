@@ -59,7 +59,7 @@ class BuyerModel {
         }
     }
 
-    public async retrieveBuyerInfo(response:any, value:number) {
+    public async retrieveBuyerInfo(response:any, value:any) {
         var query = this.model.findOne({"buyerId": value});
         try {
             const buyerInfo = await query.exec();
@@ -70,7 +70,7 @@ class BuyerModel {
         }
     }
 
-    public async retrieveBuyersSub(response:any, value:number) {
+    public async retrieveBuyersSub(response:any, value:any) {
         var query = this.model.findAll({subscriptionID: value});
         try {
             const result = await query.exec();
@@ -81,7 +81,7 @@ class BuyerModel {
         }
     }
 
-    public async retrieveBuyersCart(response:any, value:number) {
+    public async retrieveBuyersCart(response:any, value:any) {
         var query = this.model.findOne({"buyerId": value});
         try {
             const buyerInfo = await query.exec();

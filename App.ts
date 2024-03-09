@@ -182,13 +182,13 @@ class App {
     // Query A Buyer Info
     router.get('/app/buyers/:buyerId', async (req, res) => {
       console.log("Query Buyer Info");
-      const id = Number(req.params.buyerId);
+      const id = req.params.buyerId;
       await this.Buyers.retrieveBuyerInfo(res, id);
     });
 
     // Query A Buyer's Cart
     router.get('/app/buyers/:buyerId/cart',async (req, res) => {
-      const id = Number(req.params.buyerId);
+      const id = req.params.buyerId;
       console.log("Query Buyer's Cart with id: " + id);
       await this.Buyers.retrieveBuyersCart(res, id);
     });
