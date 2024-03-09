@@ -32,7 +32,7 @@ class App {
         this.Sellers = new SellerModel_1.SellerModel(mongoDBConnection);
         this.Shoes = new ShoeModel_1.ShoeModel(mongoDBConnection);
         this.Store = new StorefrontModel_1.StorefrontModel(mongoDBConnection);
-        this.Buyers = new BuyerModel_1.BuyerModel(mongoDBConnection, this.Shoes);
+        this.Buyers = new BuyerModel_1.BuyerModel(mongoDBConnection);
     }
     // Configure Express middleware.
     middleware() {
@@ -70,6 +70,12 @@ class App {
         router.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'profile'] }));
         router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/#/storefront/80299' }), (req, res) => {
             console.log("successfully authenticated user and returned to callback page.");
+            // Access the user profile
+            const userProfile = req.user;
+            console.log(userProfile);
+            // If the userProfile has a buyerId property, you can access it like this:
+            const buyerId = userProfile ? userProfile.buyerId : null;
+            console.log(buyerId);
             console.log("redirecting to /#/");
             //res.json({req.profile});
             res.redirect('/#/');

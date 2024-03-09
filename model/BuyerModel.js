@@ -13,12 +13,12 @@ exports.BuyerModel = void 0;
 const Mongoose = require("mongoose");
 const console_1 = require("console");
 class BuyerModel {
-    constructor(DB_CONNECTION_STRING, shoes) {
+    constructor(DB_CONNECTION_STRING) {
         this.dbConnectionString = DB_CONNECTION_STRING;
         this.createSchema();
         this.createModel();
         this.addToCart = this.addToCart.bind(this);
-        this.shoes = shoes;
+        // this.shoes = shoes;
     }
     createSchema() {
         this.schema = new Mongoose.Schema({
