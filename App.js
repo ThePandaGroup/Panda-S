@@ -73,7 +73,7 @@ class App {
             console.log("redirecting to /#/list");
             res.redirect('/#/');
         });
-        router.get('/api/user', (req, res) => __awaiter(this, void 0, void 0, function* () {
+        router.get('/app/buyers', (req, res) => __awaiter(this, void 0, void 0, function* () {
             if (req.user) {
                 const buyerId = req.user.buyerId;
                 res.send(buyerId);

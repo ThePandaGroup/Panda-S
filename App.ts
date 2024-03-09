@@ -103,7 +103,7 @@ class App {
   );
 
 
-  router.get('/api/user', async (req: RequestWithUser, res) => {
+  router.get('/app/buyers', async (req: RequestWithUser, res) => {
     if (req.user) {
       const buyerId = req.user.buyerId; 
       res.send(buyerId);
