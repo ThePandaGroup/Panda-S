@@ -70,7 +70,7 @@ class App {
     // Configure API endpoints.
     routes() {
         let router = express.Router();
-        router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+        router.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'profile'] }));
         router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
             console.log("successfully authenticated user and returned to callback page.");
             console.log("redirecting to /#/list");

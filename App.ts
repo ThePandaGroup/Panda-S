@@ -88,7 +88,7 @@ class App {
 
 
     router.get('/auth/google', 
-    passport.authenticate('google', {scope: ['profile']}));
+    passport.authenticate('google', {scope:['https://www.googleapis.com/auth/userinfo.profile', 'profile']}));
 
 
     router.get('/auth/google/callback', 

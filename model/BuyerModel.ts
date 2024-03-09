@@ -112,8 +112,6 @@ class BuyerModel {
         await buyer.save();
 
         response.json({ message: shoe.shoeName + ' added to ' + buyer.buyerName + '\'s cart' }); 
-        
-
         try{
         this.scheduleRemovalFromCart(buyerId, shoeId);
         } catch(error) {
