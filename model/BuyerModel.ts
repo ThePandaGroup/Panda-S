@@ -33,7 +33,7 @@ class BuyerModel {
                 shippingAddr: String,
                 orderHistory: [String],
                 cart: [{shoeID: String, addedAt: Date}],
-                // googleId: String,
+                googleId: String,
             }, {collection: 'buyers'}
         );
     }

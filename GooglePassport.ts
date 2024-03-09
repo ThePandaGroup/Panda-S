@@ -36,13 +36,13 @@ class GooglePassport {
             }
         ));
 
-        // const dbUser = process.env.DB_USER;
-        // const dbPassword = process.env.DB_PASSWORD;
-        // const dbProtocol = process.env.DB_PROTOCOL;
+        const dbUser = process.env.DB_USER;
+        const dbPassword = process.env.DB_PASSWORD;
+        const dbProtocol = process.env.DB_PROTOCOL;
 
         
-        // const DB_CONNECTION_STRING = dbProtocol + dbUser + ':' + encodeURIComponent(dbPassword) + process.env.DB_INFO;
-        // const buyerModelInstance = new BuyerModel(DB_CONNECTION_STRING, null);
+        const DB_CONNECTION_STRING = dbProtocol + dbUser + ':' + encodeURIComponent(dbPassword) + process.env.DB_INFO;
+        const buyerModelInstance = new BuyerModel(DB_CONNECTION_STRING, null);
    
 
         passport.serializeUser(function(user, done) {
@@ -50,7 +50,9 @@ class GooglePassport {
         });
 
         passport.deserializeUser(function(user, done) {
-            done(null, user);
+            buyerModelInstance.model.findById(user.id, function(err, user) {
+                done(null, user);
+            });
         });
 
         
