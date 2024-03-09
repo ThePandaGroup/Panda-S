@@ -14,7 +14,10 @@ import * as cookieParser from 'cookie-parser';
 import { Request } from 'express';
 
 interface RequestWithUser extends Request {
-  user: any; // Or use a more specific type if you know the structure of your user object
+  user: { // Define the shape of the user object as needed
+    buyerId: string;
+    // Add other properties as needed
+  };
 }
 
 // Creates and configures an ExpressJS web server.
@@ -95,8 +98,18 @@ class App {
     passport.authenticate('google', 
       { failureRedirect: '/#/storefront/80299' }
     ),
-    (req, res) => {
+    (req: RequestWithUser, res) => {
       console.log("successfully authenticated user and returned to callback page.");
+
+      // Access the user profile
+      const userProfile = req.user;
+      console.log(userProfile);
+
+      // If the userProfile has a buyerId property, you can access it like this:
+      const buyerId = userProfile ? userProfile.buyerId : null;
+      console.log(buyerId);
+
+
       console.log("redirecting to /#/");
       //res.json({req.profile});
       res.redirect('/#/');
