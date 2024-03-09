@@ -173,14 +173,14 @@ class App {
     });
 
     // Query A Buyer's Cart
-    router.get('/app/buyers/:buyerId/cart', this.validateAuth,async (req, res) => {
+    router.get('/app/buyers/:buyerId/cart',async (req, res) => {
       const id = Number(req.params.buyerId);
       console.log("Query Buyer's Cart with id: " + id);
       await this.Buyers.retrieveBuyersCart(res, id);
     });
 
     // Add to Buyer's Cart
-    router.post('/app/buyers/:buyerId/cart/:shoeId', this.validateAuth, async (req, res) => {
+    router.post('/app/buyers/:buyerId/cart/:shoeId', async (req, res) => {
       let shoeId = req.params.shoeId;
       const buyerId = Number(req.params.buyerId);
       try {

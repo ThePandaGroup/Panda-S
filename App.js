@@ -126,13 +126,13 @@ class App {
             yield this.Buyers.retrieveBuyerInfo(res, id);
         }));
         // Query A Buyer's Cart
-        router.get('/app/buyers/:buyerId/cart', this.validateAuth, (req, res) => __awaiter(this, void 0, void 0, function* () {
+        router.get('/app/buyers/:buyerId/cart', (req, res) => __awaiter(this, void 0, void 0, function* () {
             const id = Number(req.params.buyerId);
             console.log("Query Buyer's Cart with id: " + id);
             yield this.Buyers.retrieveBuyersCart(res, id);
         }));
         // Add to Buyer's Cart
-        router.post('/app/buyers/:buyerId/cart/:shoeId', this.validateAuth, (req, res) => __awaiter(this, void 0, void 0, function* () {
+        router.post('/app/buyers/:buyerId/cart/:shoeId', (req, res) => __awaiter(this, void 0, void 0, function* () {
             let shoeId = req.params.shoeId;
             const buyerId = Number(req.params.buyerId);
             try {
