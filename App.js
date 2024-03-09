@@ -92,6 +92,7 @@ class App {
         }));
         router.get('/app/logout', (req, res) => {
             req.logout();
+            console.log("logging out");
             res.redirect('/#/');
         });
         // SHOES ROUTES

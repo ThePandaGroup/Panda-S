@@ -130,6 +130,7 @@ class App {
 
     router.get('/app/logout', (req: RequestWithUser, res) => {
       req.logout();
+      console.log("logging out");
       res.redirect('/#/');
     });
 
