@@ -79,17 +79,21 @@ class App {
             //res.json({req.profile});
             res.redirect('/#/');
         });
-        router.get('/app/user', (req, res) => __awaiter(this, void 0, void 0, function* () {
+        router.get('/app/login', (req, res) => __awaiter(this, void 0, void 0, function* () {
             if (req.user) {
                 const buyerId = req.user.id;
-                console.log("SENDING SHIT LMAO XD");
+                console.log("sending");
                 res.send(buyerId);
             }
             else {
-                console.log("AINT SENDING SHIT LMAO XDDDDDD YURRRRRRR");
+                console.log("not sending");
                 res.send(null);
             }
         }));
+        router.get('/app/logout', (req, res) => {
+            req.logout();
+            res.redirect('/#/');
+        });
         // SHOES ROUTES
         // Query All Shoes
         router.get('/app/shoes', (req, res) => __awaiter(this, void 0, void 0, function* () {

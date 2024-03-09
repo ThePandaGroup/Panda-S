@@ -18,6 +18,7 @@ interface RequestWithUser extends Request {
     id: string;
     // Add other properties as needed
   };
+  logout: () => void;
   session?: session & { buyerId?: string };
 }
 
@@ -115,16 +116,22 @@ class App {
   );
 
 
-  router.get('/app/user', async (req: RequestWithUser, res) => {
-    if (req.user) {
-      const buyerId = req.user.id; 
-      console.log("SENDING SHIT LMAO XD");
-      res.send(buyerId);
-    } else {
-      console.log("AINT SENDING SHIT LMAO XDDDDDD YURRRRRRR");
-      res.send(null);
-    }
-  });
+    router.get('/app/login', async (req: RequestWithUser, res) => {
+      if (req.user) {
+        const buyerId = req.user.id; 
+        console.log("sending");
+        res.send(buyerId);
+      } else {
+        console.log("not sending");
+        res.send(null);
+      }
+    });
+
+
+    router.get('/app/logout', (req: RequestWithUser, res) => {
+      req.logout();
+      res.redirect('/#/');
+    });
 
 
 
