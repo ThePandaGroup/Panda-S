@@ -30,30 +30,21 @@ class GooglePassport {
                 console.log("displayName: " + profile.displayName);
                 console.log("retrieve all of the profile info needed");
                 //const username = profile.displayName;
-                const DB_CONNECTION_STRING = process.env.DB_PROTOCOL + process.env.DB_USER + ':' + encodeURIComponent(process.env.DB_PASSWORD) + process.env.DB_INFO;
-                const buyerModel = new BuyerModel_1.BuyerModel(DB_CONNECTION_STRING, null);
-                yield buyerModel.createModel();
-                buyerModel.createModel();
-                buyerModel.model.findOne({ buyerId: profile.id }, (err, buyer) => {
-                    if (err) {
-                        return done(err);
-                    }
-                    if (!buyer) {
-                        // If the buyer isn't found in your database, handle it as you see fit.
-                        // You could create a new buyer, or return an error
-                        return done(null, false, { message: 'Buyer not found' });
-                    }
-                    // If the buyer is found, return it
-                    return done(null, buyer);
-                });
                 return done(null, profile);
             }));
         }));
+        const dbUser = process.env.DB_USER;
+        const dbPassword = process.env.DB_PASSWORD;
+        const dbProtocol = process.env.DB_PROTOCOL;
+        const DB_CONNECTION_STRING = dbProtocol + dbUser + ':' + encodeURIComponent(dbPassword) + process.env.DB_INFO;
+        const buyerModelInstance = new BuyerModel_1.BuyerModel(DB_CONNECTION_STRING, null);
         passport.serializeUser(function (user, done) {
-            done(null, user);
+            done(null, user.id);
         });
         passport.deserializeUser(function (user, done) {
-            done(null, user);
+            buyerModelInstance.model.findById(user.id, function (err, user) {
+                done(null, user);
+            });
         });
     }
 }

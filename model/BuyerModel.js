@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BuyerModel = void 0;
 const Mongoose = require("mongoose");
 const console_1 = require("console");
+const mongoose_findorcreate_1 = require("mongoose-findorcreate");
 class BuyerModel {
     // (DB_CONNECTION_STRING:string, shoes:ShoeModel)
     constructor(DB_CONNECTION_STRING, shoes) {
@@ -31,7 +32,9 @@ class BuyerModel {
             shippingAddr: String,
             orderHistory: [String],
             cart: [{ shoeID: String, addedAt: Date }],
+            googleId: String,
         }, { collection: 'buyers' });
+        this.schema.plugin(mongoose_findorcreate_1.default);
     }
     createModel() {
         return __awaiter(this, void 0, void 0, function* () {

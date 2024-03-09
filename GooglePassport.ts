@@ -23,20 +23,6 @@ class GooglePassport {
             (accessToken, refreshToken, profile, done) => {
                 console.log("inside new password google strategy");
 
-                BuyerModel.findOneAndUpdate(
-                    { googleId: profile.id }, // Find a document with this Google ID.
-                    {
-                        buyerName: profile.displayName,
-                        buyerEmail: profile.emails[0].value,
-                        googleId: profile.id,
-                        // Set other fields as needed.
-                    },
-                    { upsert: true, new: true, setDefaultsOnInsert: true }, // Options for creating if not found.
-                    (err, buyer) => {
-                        return done(err, buyer);
-                    }
-                );
-
 
                 process.nextTick(async () => {
                     console.log('validating google profile:' + JSON.stringify(profile));
@@ -50,23 +36,24 @@ class GooglePassport {
             }
         ));
 
+        const dbUser = process.env.DB_USER;
+        const dbPassword = process.env.DB_PASSWORD;
+        const dbProtocol = process.env.DB_PROTOCOL;
+
+        
+        const DB_CONNECTION_STRING = dbProtocol + dbUser + ':' + encodeURIComponent(dbPassword) + process.env.DB_INFO;
+        const buyerModelInstance = new BuyerModel(DB_CONNECTION_STRING, null);
+   
+
         passport.serializeUser(function(user, done) {
-            done(null, user);
+            done(null, user.id);
         });
 
-        // passport.deserializeUser(function(user, done) {
-        //     done(null, user);
-        // });
-
-        passport.deserializeUser(async (id, done) => {
-            try {
-                const user = await BuyerModel.findById(id);
+        passport.deserializeUser(function(user, done) {
+            buyerModelInstance.model.findById(user.id, function(err, user) {
                 done(null, user);
-            } catch (err) {
-                done(err, null);
-            }
+            });
         });
-
 
         
     }
