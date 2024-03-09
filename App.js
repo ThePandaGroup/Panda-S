@@ -77,8 +77,9 @@ class App {
             const userProfile = req.user;
             console.log(userProfile);
             // If the userProfile has a buyerId property, you can access it like this:
-            const buyerId = userProfile ? userProfile.buyerId : null;
+            const buyerId = userProfile.id;
             console.log(buyerId);
+            // res.json(req.user.id);
             console.log("redirecting to /#/");
             //res.json({req.profile});
             res.redirect('/#/');

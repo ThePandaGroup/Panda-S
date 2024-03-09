@@ -15,7 +15,7 @@ import { Request } from 'express';
 
 interface RequestWithUser extends Request {
   user: { // Define the shape of the user object as needed
-    buyerId: string;
+    id: string;
     // Add other properties as needed
   };
 }
@@ -113,8 +113,10 @@ class App {
       console.log(userProfile);
 
       // If the userProfile has a buyerId property, you can access it like this:
-      const buyerId = userProfile ? userProfile.buyerId : null;
+      const buyerId = userProfile.id;
       console.log(buyerId);
+
+      // res.json(req.user.id);
 
 
       console.log("redirecting to /#/");
