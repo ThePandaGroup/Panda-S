@@ -129,8 +129,10 @@ class App {
   router.get('app/user', async (req: RequestWithUser, res) => {
     if (req.user) {
       const buyerId = req.user.id; 
+      console.log("SENDING SHIT LMAO XD");
       res.send(buyerId);
     } else {
+      console.log("AINT SENDING SHIT LMAO XDDDDDD YURRRRRRR");
       res.send(null);
     }
   });

@@ -87,9 +87,11 @@ class App {
         router.get('app/user', (req, res) => __awaiter(this, void 0, void 0, function* () {
             if (req.user) {
                 const buyerId = req.user.id;
+                console.log("SENDING SHIT LMAO XD");
                 res.send(buyerId);
             }
             else {
+                console.log("AINT SENDING SHIT LMAO XDDDDDD YURRRRRRR");
                 res.send(null);
             }
         }));
