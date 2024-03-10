@@ -163,6 +163,19 @@ class App {
             }
             ;
         }));
+        // Add shoe to cart for testing purposes
+        router.post('/app/buyersTesting/:buyerId/cart/:shoeId', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            let shoeId = req.params.shoeId;
+            const buyerId = req.params.buyerId;
+            try {
+                yield this.Buyers.addToCart(res, buyerId, shoeId);
+                console.log("Added to cart");
+            }
+            catch (err) {
+                console.log(`Error in adding an Item to the cart ${err}`);
+            }
+            ;
+        }));
         router.post('/app/buyers/', (req, res) => __awaiter(this, void 0, void 0, function* () {
             console.log("Adding a New Buyer");
             const id = crypto.randomBytes(16).toString("hex");

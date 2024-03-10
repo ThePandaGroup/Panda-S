@@ -139,7 +139,7 @@ class BuyerModel {
                 catch (error) {
                     console.error('Error removing item from cart during timeout: ', error);
                 }
-            }), 45000);
+            }), 5 * 60 * 1000);
         });
     }
     removeFromCart(buyerId, shoeId) {

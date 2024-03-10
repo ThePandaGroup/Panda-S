@@ -215,7 +215,7 @@ class App {
 
     // Add shoe to cart for testing purposes
 
-    router.post('/app/buyers/:buyerId/cart/:shoeId', async (req, res) => {
+    router.post('/app/buyersTesting/:buyerId/cart/:shoeId', async (req, res) => {
       let shoeId = req.params.shoeId;
       const buyerId = req.params.buyerId;
       try {
