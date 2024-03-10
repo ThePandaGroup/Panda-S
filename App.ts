@@ -213,6 +213,19 @@ class App {
       };
     })
 
+    // Add shoe to cart for testing purposes
+
+    router.post('/app/buyers/:buyerId/cart/:shoeId', async (req, res) => {
+      let shoeId = req.params.shoeId;
+      const buyerId = req.params.buyerId;
+      try {
+          await this.Buyers.addToCart(res, buyerId, shoeId);
+          console.log("Added to cart");
+      } catch(err) {
+          console.log(`Error in adding an Item to the cart ${err}`);
+      };
+    });
+
 
 
     router.post('/app/buyers/', async (req, res) => {
