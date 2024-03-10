@@ -154,6 +154,21 @@ class App {
     })
 
 
+    router.delete('/app/buyersDeleteTesting/:buyerId/cart/:shoeId', async (req, res) => {
+      let shoeId = req.params.shoeId;
+      const buyerId = req.params.buyerId; // Use req.user.id instead of req.params.buyerId
+      try {
+        await this.Buyers.removeFromCart(buyerId, shoeId);
+        console.log("Removed from cart");
+        res.send({ message: 'Shoe removed from cart' });
+      } catch(err) {
+        console.log(`Error in removing an Item from the cart ${err}`);
+        res.status(500).send({ message: 'Error removing shoe from cart' });
+      };
+    })
+
+
+
 
     // SHOES ROUTES
 
