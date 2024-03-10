@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme ="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="./index.html">Panda-S</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item ms-3 me-3">
+                <a class="nav-link active" aria-current="page" href="#">Featured</a>
+              </li>
+              <li class="nav-item ms-3 me-3">
+                <a class="nav-link" href="#">Sale</a>
+              </li>
+              <li class="nav-item me-3">
+                <a class="nav-link" href="#">Forum</a>
+              </li>
+              
+            <form class="d-flex" role="search">
+              <input class="form-control ms-" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav ">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> 
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Profile</a></li>
+                  <li><a class="dropdown-item" href="#">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 my-5">
+                    <div class="image-container" style="width: 100%; height: 300px;"> <!-- Inline style for demonstration -->
+                        <img src="./assets/airJordan1.png" alt="Product Image" class="img-fluid d-block" style="max-width: 100%; max-height: 100%;">
+                    </div>
+                </div>
+          
+                <div class="col-md-6 my-5">
+                    <div class="row">
+                    <div class="col-12">
+                        <h2>Air Jordan 1 in Light Blue</h2>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-12">
+                        <p>109.99</p>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-12">
+                        <p>★★★★☆</p>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-6">
+                        <p>Quantity: 1</p>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-primary">Buy Now</button>
+                        <button class="btn btn-secondary">Add to Cart</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>          
+          
+    
+    <!-- Tabs for Product Description and Contact Seller -->
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-fill mb-3" id="productTab" role="tablist">
+        <li class="nav-item" role = "tab">
+            <a 
+            data-mdb-tab-init
+            class="nav-link active" 
+            id="description-tab" 
+            data-toggle="tab" 
+            href="#description" 
+            role="tab" 
+            aria-controls="description" 
+            aria-selected="true"
+            >Product Description</a
+            >
+        </li>
+        <li class="nav-item" role = "tab" >
+            <a
+            data-mdb-tab-init
+            class="nav-link" 
+            id="contact-tab" 
+            data-toggle="tab" 
+            href="#contact" 
+            role="tab" 
+            aria-controls="contact" 
+            aria-selected="true"
+            >Contact Seller</a
+            >
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content" id="descriptionContent">
+        <div 
+        class="tab-pane fade show active" 
+        id="description" 
+        role="tabpanel" 
+        aria-labelledby="description"
+        >            
+        Comfortable and stylish shoes, made to showcase your personality.
+        <!-- Product Description Content -->
+        </div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact">
+          Email: contactMe@email.com
+        <!-- Contact Seller Content -->
+        </div>
+    </div>
+
+    <!-- Customer Reviews -->
+    <div class="my-3">
+        <!-- Reviews go here -->
+    </div>
+
+    <!-- Footer here -->
+    
+    </div>
+
+    <!-- Include Bootstrap JS and its dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
