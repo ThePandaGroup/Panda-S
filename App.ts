@@ -153,7 +153,7 @@ class App {
       };
     })
 
-
+    // route for removing a shoe from the cart for testing purposes
     router.delete('/app/buyersDeleteTesting/:buyerId/cart/:shoeId', async (req, res) => {
       let shoeId = req.params.shoeId;
       const buyerId = req.params.buyerId; // Use req.user.id instead of req.params.buyerId
