@@ -142,6 +142,34 @@ class BuyerModel {
             }), 45000);
         });
     }
+    removeFromCart(buyerId, shoeId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("Removing Shoe from Cart ...");
+            try {
+                // Find the buyer and the shoe
+                const buyer = yield this.model.findOne({ buyerId: buyerId });
+                const shoe = yield this.shoes.getShoe(shoeId);
+                if (!buyer || !shoe) {
+                    console.error('Buyer or Shoe not found');
+                    return;
+                }
+                // Find the shoe in the buyer's cart
+                const index = buyer.cart.findIndex(item => item.shoeID === shoeId);
+                if (index > -1) {
+                    // Remove the shoe from the cart and increase the shoe quantity
+                    buyer.cart.splice(index, 1);
+                    shoe.shoeQuantity += 1;
+                    // Save the changes
+                    yield buyer.save();
+                    yield shoe.save();
+                }
+                console.log("Removed from Cart!");
+            }
+            catch (e) {
+                console.error(e);
+            }
+        });
+    }
 }
 exports.BuyerModel = BuyerModel;
 //# sourceMappingURL=BuyerModel.js.map

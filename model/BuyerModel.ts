@@ -144,24 +144,39 @@ class BuyerModel {
         }, 45000);
     
     }
-}
-        
+
+
+    public async removeFromCart(buyerId: string, shoeId: string) {
+        console.log("Removing Shoe from Cart ...");
+        try {
+            // Find the buyer and the shoe
+            const buyer = await this.model.findOne({buyerId: buyerId});
+            const shoe = await this.shoes.getShoe(shoeId);
     
-        // Start a timer to remove the shoe from the cart if not purchased within 30 seconds
-        /* await setTimeout(async () => {
-            const buyerRefreshed = await this.model.findOne({buyerId: buyerId});
-            const shoeRefreshed = await this.shoes.getShoe(shoeId);
-    
-            const index = buyerRefreshed.cart.findIndex(item => item.shoeID === shoeId);
-            if (index > -1) {
-                buyerRefreshed.cart.splice(index, 1);
-                shoeRefreshed.shoeQuantity += 1;
-    
-                await buyerRefreshed.save();
-                await shoeRefreshed.save();
+            if (!buyer || !shoe) {
+                console.error('Buyer or Shoe not found');
+                return;
             }
-        }, 45000); */
     
-        // response.send('Shoe added to cart');
+            // Find the shoe in the buyer's cart
+            const index = buyer.cart.findIndex(item => item.shoeID === shoeId);
+            if (index > -1) {
+                // Remove the shoe from the cart and increase the shoe quantity
+                buyer.cart.splice(index, 1);
+                shoe.shoeQuantity += 1;
+    
+                // Save the changes
+                await buyer.save();
+                await shoe.save();
+            }
+    
+            console.log("Removed from Cart!")
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+}
+    
 
 export {BuyerModel};

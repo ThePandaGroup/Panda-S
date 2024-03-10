@@ -140,6 +140,19 @@ class App {
       });
     });
 
+    router.delete('/app/buyers/cart/:shoeId', this.validateAuth, async (req: RequestWithUser, res) => {
+      let shoeId = req.params.shoeId;
+      const buyerId = req.user.id; // Use req.user.id instead of req.params.buyerId
+      try {
+        await this.Buyers.removeFromCart(buyerId, shoeId);
+        console.log("Removed from cart");
+        res.send({ message: 'Shoe removed from cart' });
+      } catch(err) {
+        console.log(`Error in removing an Item from the cart ${err}`);
+        res.status(500).send({ message: 'Error removing shoe from cart' });
+      };
+    })
+
 
 
     // SHOES ROUTES
@@ -163,12 +176,6 @@ class App {
       await this.Shoes.retrieveShoeCount(res);
     });
 
-    // Add shoe to cart
-    // router.post('/app/add-to-cart/:buyerId/:shoeId', async (req, res) => {
-    //   let shoeId = req.params.shoeId;
-    //   const buyerId = Number(req.params.buyerId);
-    //   await this.Buyers.addToCart(res, buyerId, shoeId);
-    // });
 
 
     // BUYER ROUTE
@@ -193,18 +200,8 @@ class App {
       await this.Buyers.retrieveBuyersCart(res, id);
     });
 
-    // Add to Buyer's Cart
-    // router.post('/app/buyers/:buyerId/cart/:shoeId', async (req, res) => {
-    //   let shoeId = req.params.shoeId;
-    //   const buyerId = Number(req.params.buyerId);
-    //   try {
-    //       await this.Buyers.addToCart(res, buyerId, shoeId);
-    //       console.log("Added to cart");
-    //   } catch(err) {
-    //       console.log(`Error in adding an Item to the cart ${err}`);
-    //   };
-    // })
 
+    // Add shoe to buyer's cart
     router.post('/app/buyers/cart/:shoeId', this.validateAuth, async (req: RequestWithUser, res) => {
       let shoeId = req.params.shoeId;
       const buyerId = req.user.id; // Use req.user.id instead of req.params.buyerId
@@ -216,21 +213,7 @@ class App {
       };
     })
 
-    // router.post('/app/buyers/:buyerId/cart/:shoeId', this.validateAuth, async (req: RequestWithUser, res) => {
-    //   let shoeId = req.params.shoeId;
-    //   const buyerId = Number(req.params.buyerId);
-      
-    //   if (req.user.id !== String(buyerId)) {
-    //     return res.status(403).send('Unauthorized');
-    //   }
-    
-    //   try {
-    //       await this.Buyers.addToCart(res, buyerId, shoeId);
-    //       console.log("Added to cart");
-    //   } catch(err) {
-    //       console.log(`Error in adding an Item to the cart ${err}`);
-    //   };
-    // })
+
 
     router.post('/app/buyers/', async (req, res) => {
       console.log("Adding a New Buyer");

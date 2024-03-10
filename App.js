@@ -101,6 +101,20 @@ class App {
                 res.status(200).json({ message: 'Successfully logged out' });
             });
         });
+        router.delete('/app/buyers/cart/:shoeId', this.validateAuth, (req, res) => __awaiter(this, void 0, void 0, function* () {
+            let shoeId = req.params.shoeId;
+            const buyerId = req.user.id; // Use req.user.id instead of req.params.buyerId
+            try {
+                yield this.Buyers.removeFromCart(buyerId, shoeId);
+                console.log("Removed from cart");
+                res.send({ message: 'Shoe removed from cart' });
+            }
+            catch (err) {
+                console.log(`Error in removing an Item from the cart ${err}`);
+                res.status(500).send({ message: 'Error removing shoe from cart' });
+            }
+            ;
+        }));
         // SHOES ROUTES
         // Query All Shoes
         router.get('/app/shoes', (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -118,12 +132,6 @@ class App {
             console.log("Query Shoe Count");
             yield this.Shoes.retrieveShoeCount(res);
         }));
-        // Add shoe to cart
-        // router.post('/app/add-to-cart/:buyerId/:shoeId', async (req, res) => {
-        //   let shoeId = req.params.shoeId;
-        //   const buyerId = Number(req.params.buyerId);
-        //   await this.Buyers.addToCart(res, buyerId, shoeId);
-        // });
         // BUYER ROUTE
         // Query All Buyers
         router.get('/app/buyers', (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -142,17 +150,7 @@ class App {
             console.log("Query Buyer's Cart with id: " + id);
             yield this.Buyers.retrieveBuyersCart(res, id);
         }));
-        // Add to Buyer's Cart
-        // router.post('/app/buyers/:buyerId/cart/:shoeId', async (req, res) => {
-        //   let shoeId = req.params.shoeId;
-        //   const buyerId = Number(req.params.buyerId);
-        //   try {
-        //       await this.Buyers.addToCart(res, buyerId, shoeId);
-        //       console.log("Added to cart");
-        //   } catch(err) {
-        //       console.log(`Error in adding an Item to the cart ${err}`);
-        //   };
-        // })
+        // Add shoe to buyer's cart
         router.post('/app/buyers/cart/:shoeId', this.validateAuth, (req, res) => __awaiter(this, void 0, void 0, function* () {
             let shoeId = req.params.shoeId;
             const buyerId = req.user.id; // Use req.user.id instead of req.params.buyerId
@@ -165,19 +163,6 @@ class App {
             }
             ;
         }));
-        // router.post('/app/buyers/:buyerId/cart/:shoeId', this.validateAuth, async (req: RequestWithUser, res) => {
-        //   let shoeId = req.params.shoeId;
-        //   const buyerId = Number(req.params.buyerId);
-        //   if (req.user.id !== String(buyerId)) {
-        //     return res.status(403).send('Unauthorized');
-        //   }
-        //   try {
-        //       await this.Buyers.addToCart(res, buyerId, shoeId);
-        //       console.log("Added to cart");
-        //   } catch(err) {
-        //       console.log(`Error in adding an Item to the cart ${err}`);
-        //   };
-        // })
         router.post('/app/buyers/', (req, res) => __awaiter(this, void 0, void 0, function* () {
             console.log("Adding a New Buyer");
             const id = crypto.randomBytes(16).toString("hex");
