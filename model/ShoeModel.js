@@ -27,6 +27,7 @@ class ShoeModel {
             storeId: String,
             shoePrice: Number,
             shoeQuantity: Number,
+            shoePic: String,
         }, { collection: 'shoes' });
     }
     createModel() {
