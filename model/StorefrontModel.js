@@ -26,6 +26,7 @@ class StorefrontModel {
             invList: [String],
             salesHistory: [String],
             storePic: String,
+            storeBanner: String,
         }, { collection: 'storefront' });
     }
     createModel() {

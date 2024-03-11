@@ -8,6 +8,7 @@ interface IStorefront extends Mongoose.Document {
     invList: string[];
     salesHistory: string[];
     storePic: string;
+    storeBanner: string;
 }
 
 export {IStorefront};
