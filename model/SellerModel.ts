@@ -18,7 +18,6 @@ class SellerModel {
             sellerName: String,
             sellerId: String,
             sellerEmail: String,
-            sellerPassword: String,
             subscriptionID: Number,
         }, { collection: "sellers" });
     }

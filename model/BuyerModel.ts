@@ -28,7 +28,6 @@ class BuyerModel {
                 buyerName: String,
                 buyerId: String,
                 buyerEmail: String,
-                buyerPassword: String,
                 subscriptionID: Number,
                 shippingAddr: String,
                 orderHistory: [String],
