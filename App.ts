@@ -214,8 +214,8 @@ class App {
     });
 
     // Query A Buyer's fav list
-    router.get('/app/buyers/:buyerId/favlist',async (req, res) => {
-      const id = req.params.buyerId;
+    router.get('/app/buyers/:buyerId/favlist',async (req: RequestWithUser, res) => {
+      const id = req.user.id;
       console.log("Query Buyer's fav list with id: " + id);
       await this.Buyers.retrieveBuyersFavList(res, id);
     });
