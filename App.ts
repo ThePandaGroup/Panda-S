@@ -213,6 +213,25 @@ class App {
       await this.Buyers.retrieveBuyersCart(res, id);
     });
 
+    // Query A Buyer's fav list
+    router.get('/app/buyers/:buyerId/favlist',async (req, res) => {
+      const id = req.params.buyerId;
+      console.log("Query Buyer's fav list with id: " + id);
+      await this.Buyers.retrieveBuyersFavList(res, id);
+    });
+
+    // Add to Buyer's FavList
+    router.post('/app/buyers/:buyerId/favlist/:shoeId', async (req, res) => {
+      let shoeId = req.params.shoeId;
+      const buyerId = req.params.buyerId;
+      try {
+          await this.Buyers.addToFavList(res, buyerId, shoeId);
+          console.log("Added to favlist");
+      } catch(err) {
+          console.log(`Error in adding an Item to the favlist ${err}`);
+      };
+    })
+
 
     // Add shoe to buyer's cart
     router.post('/app/buyers/cart/:shoeId', this.validateAuth, async (req: RequestWithUser, res) => {

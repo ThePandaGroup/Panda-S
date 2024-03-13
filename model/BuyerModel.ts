@@ -92,6 +92,35 @@ class BuyerModel {
         }
     }
 
+    public async retrieveBuyersFavList(response:any, value:any) {
+        var query = this.model.findOne({"buyerId": value});
+        try {
+            const buyerInfo = await query.exec();
+            response.json(buyerInfo.favList) ;
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    public async addToFavList(response:any, buyerId: string, shoeId: string) {
+        var query = this.model.findOne({"buyerId": buyerId});
+        try {
+            const buyer = await query.exec();
+            if (buyer) {
+                buyer.favList.push(shoeId);
+                await buyer.save();
+                response.json({ message: 'Shoe added to ' + buyer.buyerName + '\'s fav list' });
+            }
+            else {
+                response.status(404).send('Buyer not found');
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
     public async addToCart(response:any, buyerId: string, shoeId: string){
         // Find the buyer and the shoe
         const buyer = await this.model.findOne({buyerId: buyerId});
