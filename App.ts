@@ -14,9 +14,8 @@ import * as cookieParser from 'cookie-parser';
 import { Request } from 'express';
 
 interface RequestWithUser extends Request {
-  user?: { // Define the shape of the user object as needed
+  user?: { 
     id: string;
-    // Add other properties as needed
   };
   logout: () => void;
   session?: session & { buyerId?: string };
