@@ -121,6 +121,36 @@ class BuyerModel {
         }
     }
 
+    public async removeFromFavList(buyerId: string, shoeId: string) {
+        console.log("Removing Shoe from Favorite List ...");
+        try {
+            // Find the buyer and the shoe
+            const buyer = await this.model.findOne({buyerId: buyerId});
+            const shoe = await this.shoes.getShoe(shoeId);
+    
+            if (!buyer || !shoe) {
+                console.error('Buyer or Shoe not found');
+                return;
+            }
+    
+            // Find the shoe in the buyer's cart
+            const index = buyer.favList.findIndex(item => item.shoeID === shoeId);
+            if (index > -1) {
+                // Remove the shoe from the cart and increase the shoe quantity
+                buyer.favList.splice(index, 1);
+                shoe.shoeQuantity += 1;
+    
+                // Save the changes
+                await buyer.save();
+                await shoe.save();
+            }
+    
+            console.log("Removed from Favorite List!")
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     public async addToCart(response:any, buyerId: string, shoeId: string){
         // Find the buyer and the shoe
         const buyer = await this.model.findOne({buyerId: buyerId});

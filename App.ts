@@ -152,6 +152,19 @@ class App {
       };
     })
 
+    router.delete('/app/buyers/favList/:shoeId', this.validateAuth, async (req: RequestWithUser, res) => {
+      let shoeId = req.params.shoeId;
+      const buyerId = req.user.id;
+      try {
+        await this.Buyers.removeFromFavList(buyerId, shoeId);
+        console.log("Removed from Favorite List");
+        res.send({ message: 'Shoe removed from Favorite list' });
+      } catch(err) {
+        console.log(`Error in removing an Item from the Favorite list ${err}`);
+        res.status(500).send({ message: 'Error removing shoe from Favorite list' });
+      };
+    })
+
     // route for removing a shoe from the cart for testing purposes
     router.delete('/app/buyersDeleteTesting/:buyerId/cart/:shoeId', async (req, res) => {
       let shoeId = req.params.shoeId;
