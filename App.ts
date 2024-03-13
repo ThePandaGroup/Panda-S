@@ -214,7 +214,7 @@ class App {
     });
 
     // Query A Buyer's fav list
-    router.get('/app/buyers/:buyerId/favlist',async (req: RequestWithUser, res) => {
+    router.get('/app/buyers/favlist', this.validateAuth, async (req: RequestWithUser, res) => {
       const id = req.user.id;
       console.log("Query Buyer's fav list with id: " + id);
       await this.Buyers.retrieveBuyersFavList(res, id);
