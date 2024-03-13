@@ -168,7 +168,6 @@ class App {
 
 
 
-
     // SHOES ROUTES
 
     // Query All Shoes
