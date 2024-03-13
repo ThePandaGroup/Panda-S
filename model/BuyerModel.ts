@@ -33,6 +33,7 @@ class BuyerModel {
                 orderHistory: [String],
                 cart: [{shoeID: String, addedAt: Date}],
                 // googleId: String,
+                favList: [String]
             }, {collection: 'buyers'}
         );
     }
