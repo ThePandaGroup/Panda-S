@@ -221,9 +221,9 @@ class App {
     });
 
     // Add to Buyer's FavList
-    router.post('/app/buyers/:buyerId/favlist/:shoeId', async (req, res) => {
+    router.post('/app/buyers/favlist/:shoeId', this.validateAuth, async (req: RequestWithUser, res) => {
       let shoeId = req.params.shoeId;
-      const buyerId = req.params.buyerId;
+      const buyerId = req.user.id;
       try {
           await this.Buyers.addToFavList(res, buyerId, shoeId);
           console.log("Added to favlist");
